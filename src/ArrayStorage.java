@@ -5,13 +5,15 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
+    int size = 0;
 
     void clear() {
         Arrays.fill(storage,null);
     }
 
     void save(Resume r) {
-        storage[size()] = r;
+        storage[size] = r;
+        size++;
     }
 
     Resume get(String uuid) {
@@ -19,33 +21,26 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
+        if (size != 0){
         storage[getIndex(uuid)] = null;
-        sortArray();
+        rebuildArray();
+        size--;
+        }
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-
-        return Arrays.copyOf(storage,size());
-        //return new Resume[0];
+        return Arrays.copyOf(storage,size);
     }
 
     int size(){
-
-        int size = 0;
-
-        while(storage[size] != null)
-        {
-            size++;
-        }
-
         return size;
     }
 
-    // Метод сортировки массива, чтобы сразу
-    void sortArray(){
+    // пересобираем массив.
+    void rebuildArray(){
         Resume[] arrayBuf = new Resume[10000];
         int indexBuf = 0;
 
@@ -57,7 +52,6 @@ public class ArrayStorage {
         }
 
         clear();
-
         System.arraycopy(arrayBuf,0,storage,0,arrayBuf.length);
         Arrays.fill(arrayBuf,null);
     }
@@ -66,7 +60,7 @@ public class ArrayStorage {
     int getIndex(String uuid){
         int indexBuf = -1;
 
-        for (int i = 0; i < size(); i++){
+        for (int i = 0; i < size; i++){
             if (storage[i].uuid == uuid) {
                 indexBuf = i;
                 break;
