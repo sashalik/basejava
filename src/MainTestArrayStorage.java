@@ -10,7 +10,7 @@ public class MainTestArrayStorage {
         Resume r2 = new Resume();
         r2.uuid = "uuid2";
         Resume r3 = new Resume();
-        r3.uuid = "uuid3";
+        r3.uuid = "dummy";
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
