@@ -8,7 +8,8 @@ public class ArrayStorage {
     int size = 0;
 
     void clear() {
-        Arrays.fill(storage,null);
+        Arrays.fill(storage, null);
+        size = 0;
     }
 
     void save(Resume r) {
@@ -21,10 +22,10 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        if (size != 0){
-        storage[getIndex(uuid)] = null;
-        rebuildArray();
-        size--;
+        if (size != 0) {
+            storage[getIndex(uuid)] = null;
+            rebuildArray();
+            size--;
         }
     }
 
@@ -32,35 +33,33 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(storage,size);
+        return Arrays.copyOf(storage, size);
     }
 
-    int size(){
+    int size() {
         return size;
     }
 
     // пересобираем массив.
-    void rebuildArray(){
-        Resume[] arrayBuf = new Resume[10000];
-        int indexBuf = 0;
+    void rebuildArray() {
 
-        for(int i = 0; i < storage.length; i++) {
-            if (storage[i] != null){
-                arrayBuf[indexBuf] = storage[i];
-                indexBuf++;
+        for (int i = 0; i < storage.length; i++) {
+            if (i == storage.length - 1) {
+                break;
+            } else if (storage[i] == null && storage[i + 1] == null) {
+                break;
+            } else if (storage[i] == null) {
+                storage[i] = storage[i + 1];
+                storage[i + 1] = null;
             }
         }
-
-        clear();
-        System.arraycopy(arrayBuf,0,storage,0,arrayBuf.length);
-        Arrays.fill(arrayBuf,null);
     }
 
     //Метод получения текущего индекса для объекта
-    int getIndex(String uuid){
-        int indexBuf = -1;
+    int getIndex(String uuid) {
+        int indexBuf = 0;
 
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             if (storage[i].uuid == uuid) {
                 indexBuf = i;
                 break;
