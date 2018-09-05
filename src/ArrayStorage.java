@@ -18,14 +18,26 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        return storage[getIndex(uuid)];
+        switch (getIndex(uuid)) {
+            case -1:
+                return null;
+            default:
+                return storage[getIndex(uuid)];
+        }
     }
 
     void delete(String uuid) {
-        if (size != 0) {
-            storage[getIndex(uuid)] = null;
-            rebuildArray();
-            size--;
+
+        switch (getIndex(uuid)) {
+            case -1:
+                break;
+            default: {
+                if (size != 0) {
+                    storage[getIndex(uuid)] = null;
+                    rebuildArray();
+                    size--;
+                }
+            }
         }
     }
 
@@ -57,7 +69,7 @@ public class ArrayStorage {
 
     //Метод получения текущего индекса для объекта
     int getIndex(String uuid) {
-        int indexBuf = 0;
+        int indexBuf = -1;
 
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid == uuid) {
