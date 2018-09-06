@@ -8,7 +8,7 @@ public class ArrayStorage {
     int size = 0;
 
     void clear() {
-        Arrays.fill(storage, null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
@@ -18,23 +18,19 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-
-        int indexBuf = getIndex(uuid);
-
-        if (indexBuf == -1) {
+        int i = getIndex(uuid);
+        if (i == -1) {
             return null;
         } else {
-            return storage[indexBuf];
+            return storage[i];
         }
     }
 
     void delete(String uuid) {
-
-        int indexBuf = getIndex(uuid);
-
-        if (indexBuf != -1) {
-            storage[indexBuf] = null;
-            rebuildArray();
+        int i = getIndex(uuid);
+        if (i != -1) {
+            storage[i] = null;
+            rebuildArray(i);
             size--;
         }
     }
@@ -51,31 +47,17 @@ public class ArrayStorage {
     }
 
     // пересобираем массив.
-    void rebuildArray() {
-
-        for (int i = 0; i < storage.length; i++) {
-            if (i == storage.length - 1) {
-                break;
-            } else if (storage[i] == null && storage[i + 1] == null) {
-                break;
-            } else if (storage[i] == null) {
-                storage[i] = storage[i + 1];
-                storage[i + 1] = null;
-            }
-        }
+    void rebuildArray(int i) {
+        System.arraycopy(storage, i + 1, storage, i, size - i);
     }
 
     //Метод получения текущего индекса для объекта
     int getIndex(String uuid) {
-        int indexBuf = -1;
-
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid == uuid) {
-                indexBuf = i;
-                break;
+                return i;
             }
         }
-
-        return indexBuf;
+        return -1;
     }
 }
