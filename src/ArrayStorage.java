@@ -18,26 +18,24 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        switch (getIndex(uuid)) {
-            case -1:
-                return null;
-            default:
-                return storage[getIndex(uuid)];
+
+        int indexBuf = getIndex(uuid);
+
+        if (indexBuf == -1) {
+            return null;
+        } else {
+            return storage[indexBuf];
         }
     }
 
     void delete(String uuid) {
 
-        switch (getIndex(uuid)) {
-            case -1:
-                break;
-            default: {
-                if (size != 0) {
-                    storage[getIndex(uuid)] = null;
-                    rebuildArray();
-                    size--;
-                }
-            }
+        int indexBuf = getIndex(uuid);
+
+        if (indexBuf != -1) {
+            storage[indexBuf] = null;
+            rebuildArray();
+            size--;
         }
     }
 
