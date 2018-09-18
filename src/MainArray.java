@@ -57,7 +57,7 @@ public class MainArray {
                         printAll();
                         break;
                     } else if (newUuid == null) {
-                        System.out.println("Не указано новое значение для изменения");
+                        System.out.println("No new value specified for the change");
                         printAll();
                         break;
                     } else if (ARRAY_STORAGE.getIndex(newUuid) != -1) {
