@@ -12,9 +12,12 @@ public class ArrayStorage {
         size = 0;
     }
 
-    void save(Resume r) {
-        storage[size] = r;
-        size++;
+    void save(Resume resume) {
+        int i = getIndex(resume.uuid);
+        if (i == -1) {
+            storage[size] = resume;
+            size++;
+        }
     }
 
     Resume get(String uuid) {
@@ -32,6 +35,14 @@ public class ArrayStorage {
             storage[i] = null;
             rebuildArray(i);
             size--;
+        }
+    }
+
+    void update(Resume resume, String newUuid){
+        int i = getIndex(resume.uuid);
+        if (i !=-1){
+            resume.uuid = newUuid;
+            storage[i] = resume;
         }
     }
 
