@@ -14,7 +14,7 @@ public class ArrayStorage {
     }
 
     public void save(Resume resume) {
-        if (getIndex(resume) != -1) {
+        if (getIndex(resume.uuid) != -1) {
             System.out.println("Resume '" + resume + "' is already in the array");
         } else if (size == MAX_LENGTH) {
             System.out.println("The size of the array has reached acceptable limits");
@@ -24,7 +24,7 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        int index = getIndex(new Resume(uuid));
+        int index = getIndex(uuid);
 
         if (index == -1) {
             System.out.println("Resume '" + uuid + "' is not contained in the array");
@@ -34,7 +34,7 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        int index = getIndex(new Resume(uuid));
+        int index = getIndex(uuid);
 
         if (index == -1) {
             System.out.println("Resume '" + uuid + "' is not contained in the array");
@@ -45,7 +45,7 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        int index = getIndex(resume);
+        int index = getIndex(resume.uuid);
 
         if (index == -1) {
             System.out.println("Resume '" + resume + "' is not contained in the array");
@@ -71,9 +71,9 @@ public class ArrayStorage {
     }
 
     // Метод получения индекса по поиску объекта в массиве
-    private int getIndex(Resume resume) {
+    private int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].equals(resume)) {
+            if (storage[i].uuid.equals(uuid)) {
                 return i;
             }
         }
