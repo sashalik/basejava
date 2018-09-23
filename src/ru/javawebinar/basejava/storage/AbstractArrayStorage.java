@@ -5,13 +5,13 @@ import ru.javawebinar.basejava.model.Resume;
 import java.util.Arrays;
 
 /**
-        * Array based storage for Resumes
-        */
+ * Array based storage for Resumes
+ */
 public abstract class AbstractArrayStorage implements Storage {
     protected static final int STORAGE_LIMIT = 10000;
 
-    public Resume[] storage = new Resume[STORAGE_LIMIT];
-    public int size = 0;
+    protected Resume[] storage = new Resume[STORAGE_LIMIT];
+    protected int size = 0;
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -61,7 +61,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     // пересобираем массив.
-    private void rebuildArray(int i) {
+    protected void rebuildArray(int i) {
         System.arraycopy(storage, i + 1, storage, i, size - i);
     }
 
