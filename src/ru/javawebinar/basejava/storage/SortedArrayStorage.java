@@ -41,9 +41,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
         for (int i = size - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
-            /*Сравниваем элементы попарно,
-              если они имеют неправильный порядок,
-              то меняем местами*/
                 if (storage[j].hashCode() > storage[j + 1].hashCode()) {
                     Resume tmp = storage[j];
                     storage[j] = storage[j + 1];
