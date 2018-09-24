@@ -28,52 +28,7 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (index >= 0) {
-            System.out.println("Resume '" + resume + "' is already in the array");
-        } else if (size == STORAGE_LIMIT) {
-            System.out.println("The size of the array has reached acceptable limits");
-        } else {
-            rebuildArray(-index - 1, "Save");
-            storage[-index - 1] = resume;
-            size++;
-        }
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-
-        if (index < 0) {
-            System.out.println("Resume '" + uuid + "' is not contained in the array");
-        } else {
-            rebuildArray(index, "Del");
-            size--;
-        }
-    }
-
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
-
-    // пересобираем массив.
-    protected void rebuildArray(int i, String action) {
-        if (action.equals("Save")) {
-            System.arraycopy(storage, i, storage, i + 1, size - i);
-        }
-
-        if (action.equals("Del")) {
-            System.arraycopy(storage, i + 1, storage, i, size - i);
-        }
-    }
+    public abstract void save(Resume resume);
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
@@ -83,6 +38,19 @@ public abstract class AbstractArrayStorage implements Storage {
             return null;
         }
         return storage[index];
+    }
+
+    public abstract void delete(String uuid);
+
+    /**
+     * @return array, contains only Resumes in storage (without null)
+     */
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, size);
+    }
+
+    public int size() {
+        return size;
     }
 
     protected abstract int getIndex(String uuid);
