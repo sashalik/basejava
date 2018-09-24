@@ -48,7 +48,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index == -1) {
             System.out.println("Resume '" + uuid + "' is not contained in the array");
         } else {
-            rebuildArray(index);
+            rebuildArray(index, "Del");
             size--;
         }
     }
@@ -61,8 +61,14 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     // пересобираем массив.
-    protected void rebuildArray(int i) {
-        System.arraycopy(storage, i + 1, storage, i, size - i);
+    protected void rebuildArray(int i, String action) {
+        if (action.equals("Save")) {
+            System.arraycopy(storage, i, storage, i + 1, size - i);
+        }
+
+        if (action.equals("Del")) {
+             System.arraycopy(storage, i + 1, storage, i, size - i);
+        }
     }
 
     public Resume get(String uuid) {

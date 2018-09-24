@@ -24,13 +24,16 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void save(Resume resume) {
-        if (getIndex(resume.getUuid()) >= 0) {
+        int index = getIndex(resume.getUuid());
+
+        if (index >= 0) {
             System.out.println("Resume '" + resume + "' is already in the array");
         } else if (size == STORAGE_LIMIT) {
             System.out.println("The size of the array has reached acceptable limits");
         } else {
-            storage[size++] = resume;
-            sortArray();
+            rebuildArray(-index-1, "Save");
+            storage[-index-1] = resume;
+            size++;
         }
     }
 
@@ -41,20 +44,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         if (index < 0) {
             System.out.println("Resume '" + uuid + "' is not contained in the array");
         } else {
-            rebuildArray(index);
+            rebuildArray(index, "Del");
             size--;
-        }
-    }
-
-    void sortArray() {
-        for (int i = size - 1; i > 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (storage[j].compareTo(storage[j + 1]) > 0) {
-                    Resume tmp = storage[j];
-                    storage[j] = storage[j + 1];
-                    storage[j + 1] = tmp;
-                }
-            }
         }
     }
 
