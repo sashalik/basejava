@@ -40,7 +40,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         }
 
         if (action.equals("Del")) {
-            System.arraycopy(storage, i + 1, storage, i, size - i);
+            System.arraycopy(storage, i + 1, storage, i, size - i-1);
         }
     }
 

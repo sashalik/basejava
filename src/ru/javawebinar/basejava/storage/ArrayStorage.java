@@ -34,7 +34,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     // пересобираем массив.
     private void rebuildArray(int i) {
-        System.arraycopy(storage, i + 1, storage, i, size - i);
+        System.arraycopy(storage, i + 1, storage, i, size - i-1);
     }
 
 
