@@ -9,13 +9,14 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void saveResume(Resume resume, int index) {
-        storage[size++] = resume;
+        storage[size] = resume;
     }
 
     @Override
     public void deleteResume(int index) {
-        System.arraycopy(storage, index + 1, storage, index, size - index - 1);
-        size--;
+
+        storage[index] = storage[size-1];
+        storage[size] = null;
     }
 
     // Метод получения индекса по поиску объекта в массиве

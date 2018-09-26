@@ -37,6 +37,7 @@ public abstract class AbstractArrayStorage implements Storage {
             System.out.println("The size of the array has reached acceptable limits");
         } else {
             saveResume(resume, index);
+            size++;
         }
     }
 
@@ -57,6 +58,7 @@ public abstract class AbstractArrayStorage implements Storage {
             System.out.println("Resume '" + uuid + "' is not contained in the array");
         } else {
             deleteResume(index);
+            storage[size--] = null;
         }
     }
 
