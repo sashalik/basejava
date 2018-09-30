@@ -1,5 +1,8 @@
 package ru.javawebinar.basejava.storage;
 
+import ru.javawebinar.basejava.exception.ExistStorageException;
+import ru.javawebinar.basejava.exception.NotExistStorageException;
+import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
 
 import java.util.Arrays;
@@ -22,7 +25,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(resume.getUuid());
 
         if (index < 0) {
-            System.out.println("Resume '" + resume + "' is not contained in the array");
+            throw new NotExistStorageException(resume.getUuid());
         } else {
             storage[index] = resume;
         }
@@ -32,9 +35,9 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(resume.getUuid());
 
         if (index >= 0) {
-            System.out.println("Resume '" + resume + "' is already in the array");
+            throw new ExistStorageException(resume.getUuid());
         } else if (size == STORAGE_LIMIT) {
-            System.out.println("The size of the array has reached acceptable limits");
+            throw new StorageException("The size of the array has reached acceptable limits", resume.getUuid());
         } else {
             saveResume(resume, index);
             size++;
@@ -45,8 +48,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
 
         if (index < 0) {
-            System.out.println("Resume '" + uuid + "' is not contained in the array");
-            return null;
+            throw new NotExistStorageException(uuid);
         }
         return storage[index];
     }
@@ -55,7 +57,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
 
         if (index < 0) {
-            System.out.println("Resume '" + uuid + "' is not contained in the array");
+            throw new NotExistStorageException(uuid);
         } else {
             deleteResume(index);
             storage[--size] = null;
