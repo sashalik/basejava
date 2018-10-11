@@ -14,13 +14,13 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void deleteResume(int index) {
+
         storage[index] = storage[size-1];
-        storage[size] = null;
     }
 
     // Метод получения индекса по поиску объекта в массиве
     @Override
-    protected int getIndex(String uuid) {
+    protected Object getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
                 return i;

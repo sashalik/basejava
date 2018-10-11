@@ -2,59 +2,44 @@ package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
-import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
-    protected static final int STORAGE_LIMIT = 10000;
-    protected int size = 0;
-
     public void clear() {
         clean();
-        size = 0;
     }
 
     public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (index < 0) {
+        Object index = getIndex(resume.getUuid());
+        if (!getContent(index)) {
             throw new NotExistStorageException(resume.getUuid());
-        } else {
-            replaceResume(resume,index);
         }
+        replaceResume(resume, index);
     }
 
-    public void save(Resume resume){
-        int index = getIndex(resume.getUuid());
-
-        if (index >= 0) {
+    public void save(Resume resume) {
+        Object index = getIndex(resume.getUuid());
+        if (getContent(index)) {
             throw new ExistStorageException(resume.getUuid());
-        } else if (size == STORAGE_LIMIT) {
-            throw new StorageException("The size of the array has reached acceptable limits", resume.getUuid());
-        } else {
-            saveResume(resume, index);
-            size++;
         }
+        saveResume(resume, index);
     }
 
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
-
-        if (index < 0) {
+        Object index = getIndex(uuid);
+        if (!getContent(index)) {
             throw new NotExistStorageException(uuid);
         }
         return getResume(index);
     }
 
     public void delete(String uuid) {
-        int index = getIndex(uuid);
+        Object index = getIndex(uuid);
 
-        if (index < 0) {
+        if (!getContent(index)) {
             throw new NotExistStorageException(uuid);
-        } else {
-            size--;
-            deleteResume(index);
         }
+        removeResume(index);
     }
 
     public Resume[] getAll() {
@@ -62,20 +47,24 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public int size() {
-        return size;
+        return getSizeStorage();
     }
-
-    protected abstract void saveResume(Resume resume, int index);
-
-    protected abstract void deleteResume(int index);
-
-    protected abstract void replaceResume(Resume resume, int index);
-
-    protected abstract Resume getResume(int index);
-
-    protected abstract int getIndex(String uuid);
 
     protected abstract void clean();
 
+    protected abstract void replaceResume(Resume resume, Object index);
+
+    protected abstract void saveResume(Resume resume, Object index);
+
+    protected abstract Resume getResume(Object index);
+
+    protected abstract void removeResume(Object index);
+
     protected abstract Resume[] getAllResume();
+
+    protected abstract int getSizeStorage();
+
+    protected abstract Object getIndex(String uuid);
+
+    protected abstract boolean getContent(Object index);
 }
