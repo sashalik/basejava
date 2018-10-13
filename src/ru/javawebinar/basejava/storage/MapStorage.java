@@ -16,7 +16,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected void replaceResume(Resume resume, Object index) {
-        storage.replace(index.toString(), resume);
+        storage.replace((String) index, resume);
     }
 
     @Override
@@ -26,38 +26,34 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected Resume getResume(Object index) {
-        return storage.get(index.toString());
+        return storage.get(index);
     }
 
     @Override
     protected void removeResume(Object index) {
-        storage.remove(index.toString());
+        storage.remove(index);
     }
 
     @Override
-    protected Resume[] getAllResume() {
-        Resume[] resume = new Resume[storage.size()];
-        int index = 0;
-
-        for (Map.Entry<String, Resume> entry : storage.entrySet()) {
-            resume[index] = entry.getValue();
-            index++;
-        }
-        return resume;
+    public Resume[] getAll() {
+        return storage.values().toArray(new Resume[size()]);
     }
 
     @Override
-    protected int getSizeStorage() {
+    public int size() {
         return storage.size();
     }
 
     @Override
     protected Object getIndex(String uuid) {
-        return storage.get(uuid);
+        if (storage.get(uuid) != null) {
+            return uuid;
+        }
+        return null;
     }
 
     @Override
-    protected boolean getContent(Object index) {
+    protected boolean isExist(Object index) {
         return index != null;
     }
 }

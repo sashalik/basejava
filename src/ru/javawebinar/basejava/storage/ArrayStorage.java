@@ -15,7 +15,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     @Override
     public void deleteResume(int index) {
 
-        storage[index] = storage[size-1];
+        storage[index] = storage[size - 1];
     }
 
     // Метод получения индекса по поиску объекта в массиве
