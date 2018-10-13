@@ -43,17 +43,17 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAllResume() {
+    public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
 
     @Override
-    public int getSizeStorage() {
+    public int size() {
         return size;
     }
 
     @Override
-    public boolean getContent(Object index) {
+    public boolean isExist(Object index) {
         return (int) index >= 0;
     }
 
