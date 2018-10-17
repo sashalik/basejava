@@ -46,14 +46,11 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected Object getIndex(String uuid) {
-        if (storage.get(uuid) != null) {
-            return uuid;
-        }
-        return null;
+        return uuid;
     }
 
     @Override
     protected boolean isExist(Object index) {
-        return index != null;
+        return storage.containsKey(index);
     }
 }
