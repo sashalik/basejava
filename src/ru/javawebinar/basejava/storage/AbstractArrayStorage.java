@@ -6,7 +6,7 @@ import ru.javawebinar.basejava.model.Resume;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     protected static final int STORAGE_LIMIT = 10000;
 
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -18,12 +18,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void replaceResume(Resume resume, Object index) {
-        storage[(int) index] = resume;
+    public void replaceResume(Resume resume, Integer index) {
+        storage[index] = resume;
     }
 
     @Override
-    public void saveResume(Resume resume, Object index) {
+    public void saveResume(Resume resume, Integer index) {
         if (size == STORAGE_LIMIT) {
             throw new StorageException("The size of the array has reached acceptable limits", resume.getUuid());
         } else {
@@ -33,13 +33,13 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume getResume(Object index) {
+    public Resume getResume(Integer index) {
 
-        return storage[(int) index];
+        return storage[index];
     }
 
-    public void removeResume(Object index) {
-        deleteResume((int) index);
+    public void removeResume(Integer index) {
+        deleteResume(index);
         storage[--size] = null;
     }
 
@@ -54,7 +54,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public boolean isExist(Object index) {
+    public boolean isExist(Integer index) {
         return (int) index >= 0;
     }
 

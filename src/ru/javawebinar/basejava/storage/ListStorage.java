@@ -5,7 +5,7 @@ import ru.javawebinar.basejava.model.Resume;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage extends AbstractStorage {
+public class ListStorage extends AbstractStorage<Integer> {
     List<Resume> storage = new ArrayList<>();
 
     @Override
@@ -14,23 +14,23 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void replaceResume(Resume resume, Object index) {
-        storage.set((int) index, resume);
+    protected void replaceResume(Resume resume, Integer index) {
+        storage.set(index, resume);
     }
 
     @Override
-    protected void saveResume(Resume resume, Object index) {
+    protected void saveResume(Resume resume, Integer index) {
         storage.add(resume);
     }
 
     @Override
-    protected Resume getResume(Object index) {
-        return storage.get((int) index);
+    protected Resume getResume(Integer index) {
+        return storage.get(index);
     }
 
     @Override
-    protected void removeResume(Object index) {
-        storage.remove((int) index);
+    protected void removeResume(Integer index) {
+        storage.remove((int)index);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected Object getIndex(String uuid) {
+    protected Integer getIndex(String uuid) {
         for (int i = 0; i < storage.size(); i++) {
             if (storage.get(i).getUuid().equals(uuid)) {
                 return i;
@@ -54,7 +54,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object index) {
-        return (int) index >= 0;
+    protected boolean isExist(Integer index) {
+        return index >= 0;
     }
 }

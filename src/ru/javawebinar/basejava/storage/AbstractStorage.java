@@ -6,46 +6,57 @@ import ru.javawebinar.basejava.model.Resume;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
-public abstract class AbstractStorage implements Storage {
+public abstract class AbstractStorage<I> implements Storage {
+    private static final Logger LOG = Logger.getLogger(AbstractStorage.class.getName());
+
     public void clear() {
         clean();
     }
 
     public void update(Resume resume) {
-        Object index = getIndex(resume.getUuid());
+        LOG.info("Update " + resume);
+        I index = getIndex(resume.getUuid());
         if (!isExist(index)) {
+            LOG.warning("Resume '" + resume + "' is not contained in the array");
             throw new NotExistStorageException(resume.getUuid());
         }
         replaceResume(resume, index);
     }
 
     public void save(Resume resume) {
-        Object index = getIndex(resume.getUuid());
+        LOG.info("Save " + resume);
+        I index = getIndex(resume.getUuid());
         if (isExist(index)) {
+            LOG.warning("Resume '" + resume + "' is already in the array");
             throw new ExistStorageException(resume.getUuid());
         }
         saveResume(resume, index);
     }
 
     public Resume get(String uuid) {
-        Object index = getIndex(uuid);
+        LOG.info("Get " + uuid);
+        I index = getIndex(uuid);
         if (!isExist(index)) {
+            LOG.warning("Resume '" + uuid + "' is not contained in the array");
             throw new NotExistStorageException(uuid);
         }
         return getResume(index);
     }
 
     public void delete(String uuid) {
-        Object index = getIndex(uuid);
+        LOG.info("Delete " + uuid);
+        I index = getIndex(uuid);
 
         if (!isExist(index)) {
+            LOG.warning("Resume '" + uuid + "' is not contained in the array");
             throw new NotExistStorageException(uuid);
         }
         removeResume(index);
     }
 
-    public List<Resume> getAllSorted(){
+    public List<Resume> getAllSorted() {
         List<Resume> resumeList = getAllResume();
         Collections.sort(resumeList);
         return resumeList;
@@ -57,15 +68,15 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract void clean();
 
-    protected abstract void replaceResume(Resume resume, Object index);
+    protected abstract void replaceResume(Resume resume, I index);
 
-    protected abstract void saveResume(Resume resume, Object index);
+    protected abstract void saveResume(Resume resume, I index);
 
-    protected abstract Resume getResume(Object index);
+    protected abstract Resume getResume(I index);
 
-    protected abstract void removeResume(Object index);
+    protected abstract void removeResume(I index);
 
-    protected abstract Object getIndex(String uuid);
+    protected abstract I getIndex(String uuid);
 
-    protected abstract boolean isExist(Object index);
+    protected abstract boolean isExist(I index);
 }
