@@ -1,14 +1,12 @@
 package ru.javawebinar.basejava.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Resume implements Comparable<Resume> {
     private final String uuid;
     private final String fullName;
-    private final Contacts contacts;
-    private List<Section> sections = new ArrayList<>();
+    private final Map<ContactType, Contact> contacts = new HashMap();
+    private final Map<SectionType, Section> sections = new HashMap();
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -17,28 +15,22 @@ public class Resume implements Comparable<Resume> {
     public Resume(String uuid, String fullName) {
         this.uuid = uuid;
         this.fullName = fullName;
-        this.contacts = new Contacts();
     }
 
     public void addSection(Section section) {
-        sections.add(section);
+        sections.put(section.sectionType, section);
     }
 
     public Section getSection(SectionType sectionType) {
-        for (int i = 0; i < sections.size(); i++) {
-            if (sections.get(i).getType().equals(sectionType)) {
-                return sections.get(i);
-            }
-        }
-        return null;
+        return sections.get(sectionType);
     }
 
-    public void addContact(ContactType typeContact, String valueContact) {
-        contacts.setValue(typeContact, valueContact);
+    public void addContact(ContactType typeContact, String desc, String link) {
+        contacts.put(typeContact, new Contact(desc, link));
     }
 
     public String getContact(ContactType typeContact) {
-        return contacts.getValue(typeContact);
+        return contacts.get(typeContact).toString();
     }
 
     public String getUuid() {

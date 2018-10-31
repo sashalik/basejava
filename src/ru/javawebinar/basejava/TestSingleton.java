@@ -1,8 +1,5 @@
 package ru.javawebinar.basejava;
 
-import ru.javawebinar.basejava.model.ContactType;
-import ru.javawebinar.basejava.model.Contacts;
-
 public class TestSingleton {
     private static TestSingleton instance;
 
@@ -23,7 +20,7 @@ public class TestSingleton {
         /*for (SectionType type : SectionType.values()) {
             System.out.println(type.getTitle());
         }*/
-        Contacts c = new Contacts();
+        /*Contacts c = new Contacts();
 
         c.setValue(ContactType.PHONENUMBER,"00-000-00");
         c.setValue(ContactType.SKYPE,"sashal");
@@ -31,7 +28,7 @@ public class TestSingleton {
 
         for (ContactType type : ContactType.values()) {
             System.out.println(c.getValue(type));
-        }
+        }*/
 
 
     }
