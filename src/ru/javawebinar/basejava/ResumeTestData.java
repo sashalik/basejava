@@ -10,13 +10,13 @@ public class ResumeTestData {
     public static void main(String[] args) {
         resume = new Resume("zzz", "Григорий Кислин");
 
-        resume.addContact(ContactType.PHONENUMBER, "+7(921) 855-0482");
-        resume.addContact(ContactType.SKYPE, "grigory.kislin");
-        resume.addContact(ContactType.EMAIL, "gkislin@yandex.ru");
-        resume.addContact(ContactType.LINKEDIN, "Профиль LinkedIn");
-        resume.addContact(ContactType.GITHUB, "Профиль GitHub");
-        resume.addContact(ContactType.STACKOVERFLOW, "Профиль Stackoverflow");
-        resume.addContact(ContactType.HOMEPAGE, "Домашняя страница");
+        resume.addContact(ContactType.PHONENUMBER, "+7(921) 855-0482", "");
+        resume.addContact(ContactType.SKYPE, "grigory.kislin", "");
+        resume.addContact(ContactType.EMAIL, "gkislin@yandex.ru", "");
+        resume.addContact(ContactType.LINKEDIN, "Профиль LinkedIn", "");
+        resume.addContact(ContactType.GITHUB, "Профиль GitHub", "");
+        resume.addContact(ContactType.STACKOVERFLOW, "Профиль Stackoverflow", "");
+        resume.addContact(ContactType.HOMEPAGE, "Домашняя страница", "");
 
         resume.addSection(new SimpleSection(OBJECTIVE, "Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
         resume.addSection(new SimpleSection(PERSONAL, "Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
