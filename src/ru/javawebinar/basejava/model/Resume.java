@@ -5,7 +5,7 @@ import java.util.*;
 public class Resume implements Comparable<Resume> {
     private final String uuid;
     private final String fullName;
-    private final Map<ContactType, Contact> contacts = new HashMap();
+    private final Map<ContactType, ContactType> contacts = new HashMap();
     private final Map<SectionType, Section> sections = new HashMap();
 
     public Resume(String fullName) {
@@ -17,8 +17,8 @@ public class Resume implements Comparable<Resume> {
         this.fullName = fullName;
     }
 
-    public void addSection(Section section) {
-        sections.put(section.sectionType, section);
+    public void addSection(SectionType sectionType,Section section) {
+        sections.put(sectionType, section);
     }
 
     public Section getSection(SectionType sectionType) {
@@ -26,7 +26,7 @@ public class Resume implements Comparable<Resume> {
     }
 
     public void addContact(ContactType typeContact, String desc, String link) {
-        contacts.put(typeContact, new Contact(desc, link));
+        contacts.put(typeContact, typeContact.getClass(desc, link));
     }
 
     public String getContact(ContactType typeContact) {

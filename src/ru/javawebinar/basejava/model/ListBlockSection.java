@@ -6,8 +6,8 @@ import java.util.List;
 public class ListBlockSection extends Section {
     private List<InfoBlock> listInfo = new ArrayList<>();
 
-    public ListBlockSection(SectionType sectionType, String sectionInfo) {
-        super(sectionType, sectionInfo);
+    public ListBlockSection(String sectionInfo) {
+        super(sectionInfo);
     }
 
     public void addInfo(InfoBlock infoBlock) {
@@ -20,6 +20,6 @@ public class ListBlockSection extends Section {
         for (InfoBlock infoBlock : listInfo) {
             infoString.append("* " + infoBlock.toString());
         }
-        return sectionType.getTitle() + "\n" + infoString.toString();
+        return infoString.toString();
     }
 }

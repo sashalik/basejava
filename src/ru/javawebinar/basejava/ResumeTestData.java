@@ -10,7 +10,7 @@ public class ResumeTestData {
     public static void main(String[] args) {
         resume = new Resume("zzz", "Григорий Кислин");
 
-        resume.addContact(ContactType.PHONENUMBER, "+7(921) 855-0482", "");
+        resume.addContact(ContactType.PHONENUMBER, new ContactType.PHONENUMBER("+7(921) 855-0482", ""));
         resume.addContact(ContactType.SKYPE, "grigory.kislin", "");
         resume.addContact(ContactType.EMAIL, "gkislin@yandex.ru", "");
         resume.addContact(ContactType.LINKEDIN, "Профиль LinkedIn", "");
@@ -18,12 +18,12 @@ public class ResumeTestData {
         resume.addContact(ContactType.STACKOVERFLOW, "Профиль Stackoverflow", "");
         resume.addContact(ContactType.HOMEPAGE, "Домашняя страница", "");
 
-        resume.addSection(new SimpleSection(OBJECTIVE, "Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
-        resume.addSection(new SimpleSection(PERSONAL, "Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
-        resume.addSection(getAchievementSection());
-        resume.addSection(getQualificationsSection());
-        resume.addSection(getExperienceSection());
-        resume.addSection(getEducationSection());
+        resume.addSection(OBJECTIVE, new SimpleSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
+        resume.addSection(PERSONAL, new SimpleSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
+        resume.addSection(ACHIEVEMENT, getAchievementSection());
+        resume.addSection(QUALIFICATIONS, getQualificationsSection());
+        resume.addSection(EXPERIENCE, getExperienceSection());
+        resume.addSection(EDUCATION, getEducationSection());
 
         System.out.println(resume.getFullName());
         printContact();
@@ -39,12 +39,12 @@ public class ResumeTestData {
 
     private static void printSection() {
         for (SectionType type : SectionType.values()) {
-            System.out.println(resume.getSection(type).toString());
+            System.out.println(type.getTitle()+"\n"+resume.getSection(type).toString());
         }
     }
 
     private static Section getAchievementSection() {
-        ListStringSection listStringSection = new ListStringSection(ACHIEVEMENT, "");
+        ListStringSection listStringSection = new ListStringSection("");
         listStringSection.addInfo("С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. " +
                 "XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". Организация онлайн стажировок и ведение проектов. " +
                 "Более 1000 выпускников.");
@@ -61,7 +61,7 @@ public class ResumeTestData {
     }
 
     private static Section getQualificationsSection() {
-        ListStringSection listStringSection = new ListStringSection(QUALIFICATIONS, "");
+        ListStringSection listStringSection = new ListStringSection("");
         listStringSection.addInfo("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
         listStringSection.addInfo("Version control: Subversion, Git, Mercury, ClearCase, Perforce");
         listStringSection.addInfo("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle");
@@ -84,7 +84,7 @@ public class ResumeTestData {
     }
 
     private static Section getExperienceSection() {
-        ListBlockSection listBlockSection = new ListBlockSection(EXPERIENCE, "");
+        ListBlockSection listBlockSection = new ListBlockSection("");
 
         InfoBlock infoBlock1 = new InfoBlock("Java Online Projects");
         Block block1 = new Block();
@@ -161,7 +161,7 @@ public class ResumeTestData {
     }
 
     private static Section getEducationSection() {
-        ListBlockSection listBlockSection = new ListBlockSection(EDUCATION, "");
+        ListBlockSection listBlockSection = new ListBlockSection("");
 
         InfoBlock infoBlock1 = new InfoBlock("Coursera");
         Block block1 = new Block();
