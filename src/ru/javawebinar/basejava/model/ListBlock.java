@@ -3,11 +3,11 @@ package ru.javawebinar.basejava.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InfoBlock {
+public class ListBlock {
     private String nameBlock;
     private List<Block> listBlock = new ArrayList<>();
 
-    public InfoBlock(String nameBlock) {
+    public ListBlock(String nameBlock) {
         this.nameBlock = nameBlock;
     }
 

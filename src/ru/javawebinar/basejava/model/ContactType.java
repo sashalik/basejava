@@ -9,6 +9,19 @@ public enum ContactType {
     STACKOVERFLOW("Stackoverflow:"),
     HOMEPAGE("Домашняя страница:");
 
-    ContactType(String s) {
+    private String desc;
+    private String link;
+
+    ContactType(String desc) {
+        this.desc = desc;
+    }
+
+    ContactType(String desc, String link) {
+        this.desc = desc;
+        this.link = link;
+    }
+
+    public String getTitle() {
+        return desc + " " + link;
     }
 }
