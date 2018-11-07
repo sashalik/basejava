@@ -86,136 +86,136 @@ public class ResumeTestData {
     private static Section getExperienceSection() {
         ObjectSection objectSection = new ObjectSection("");
 
-        ListBlock listBlock1 = new ListBlock("Java Online Projects");
-        Block block1 = new Block();
-        block1.setPeriod("10/2013", "Сейчас");
-        block1.setBlockHeader("Автор проекта.");
-        block1.setBlockDesc("Создание, организация и проведение Java онлайн проектов и стажировок.");
-        listBlock1.addBlock(block1);
-        objectSection.addInfo(listBlock1);
+        ListInformation listInformation1 = new ListInformation("Java Online Projects");
+        Information information1 = new Information();
+        information1.setPeriod("10/2013", "Сейчас");
+        information1.setBlockHeader("Автор проекта.");
+        information1.setBlockDesc("Создание, организация и проведение Java онлайн проектов и стажировок.");
+        listInformation1.addBlock(information1);
+        objectSection.addInfo(listInformation1);
 
-        ListBlock listBlock2 = new ListBlock("Wrike");
-        Block block2 = new Block();
-        block2.setPeriod("10/2014", "01/2016");
-        block2.setBlockHeader("Старший разработчик (backend)");
-        block2.setBlockDesc("Проектирование и разработка онлайн платформы управления проектами Wrike " +
+        ListInformation listInformation2 = new ListInformation("Wrike");
+        Information information2 = new Information();
+        information2.setPeriod("10/2014", "01/2016");
+        information2.setBlockHeader("Старший разработчик (backend)");
+        information2.setBlockDesc("Проектирование и разработка онлайн платформы управления проектами Wrike " +
                 "(Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.");
-        listBlock2.addBlock(block2);
-        objectSection.addInfo(listBlock2);
+        listInformation2.addBlock(information2);
+        objectSection.addInfo(listInformation2);
 
-        ListBlock listBlock3 = new ListBlock("RIT Center");
-        Block block3 = new Block();
-        block3.setPeriod("04/2012", "10/2014");
-        block3.setBlockHeader("Java архитектор");
-        block3.setBlockDesc("Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы" +
+        ListInformation listInformation3 = new ListInformation("RIT Center");
+        Information information3 = new Information();
+        information3.setPeriod("04/2012", "10/2014");
+        information3.setBlockHeader("Java архитектор");
+        information3.setBlockDesc("Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы" +
                 " (кастомизация Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной части системы. Разработка интергационных сервисов: " +
                 "CMIS, BPMN2, 1C (WebServices), сервисов общего назначения (почта, экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online редактирование из браузера " +
                 "документов MS Office. Maven + plugin development, Ant, Apache Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, " +
                 "Unix shell remote scripting via ssh tunnels, PL/Python");
-        listBlock3.addBlock(block3);
-        objectSection.addInfo(listBlock3);
+        listInformation3.addBlock(information3);
+        objectSection.addInfo(listInformation3);
 
-        ListBlock listBlock4 = new ListBlock("Luxoft (Deutsche Bank)");
-        Block block4 = new Block();
-        block4.setPeriod("12/2010", "04/2012");
-        block4.setBlockHeader("Ведущий программист");
-        block4.setBlockDesc("Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT, Jasper, Oracle). Реализация клиентской и серверной части CRM. " +
+        ListInformation listInformation4 = new ListInformation("Luxoft (Deutsche Bank)");
+        Information information4 = new Information();
+        information4.setPeriod("12/2010", "04/2012");
+        information4.setBlockHeader("Ведущий программист");
+        information4.setBlockDesc("Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT, Jasper, Oracle). Реализация клиентской и серверной части CRM. " +
                 "Реализация RIA-приложения для администрирования, мониторинга и анализа результатов в области алгоритмического трейдинга. JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Highstock, " +
                 "Commet, HTML5.");
-        listBlock4.addBlock(block4);
-        objectSection.addInfo(listBlock4);
+        listInformation4.addBlock(information4);
+        objectSection.addInfo(listInformation4);
 
-        ListBlock listBlock5 = new ListBlock("Yota");
-        Block block5 = new Block();
-        block5.setPeriod("06/2008", "12/2010");
-        block5.setBlockHeader("Ведущий специалист");
-        block5.setBlockDesc("Дизайн и имплементация Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J, EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). " +
+        ListInformation listInformation5 = new ListInformation("Yota");
+        Information information5 = new Information();
+        information5.setPeriod("06/2008", "12/2010");
+        information5.setBlockHeader("Ведущий специалист");
+        information5.setBlockDesc("Дизайн и имплементация Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J, EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). " +
                 "Реализация администрирования, статистики и мониторинга фреймворка. Разработка online JMX клиента (Python/ Jython, Django, ExtJS)");
-        listBlock5.addBlock(block5);
-        objectSection.addInfo(listBlock5);
+        listInformation5.addBlock(information5);
+        objectSection.addInfo(listInformation5);
 
-        ListBlock listBlock6 = new ListBlock("Enkata");
-        Block block6 = new Block();
-        block6.setPeriod("03/2007", "06/2008");
-        block6.setBlockHeader("Разработчик ПО");
-        block6.setBlockDesc("Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей кластерного J2EE приложения (OLAP, Data mining).");
-        listBlock6.addBlock(block6);
-        objectSection.addInfo(listBlock6);
+        ListInformation listInformation6 = new ListInformation("Enkata");
+        Information information6 = new Information();
+        information6.setPeriod("03/2007", "06/2008");
+        information6.setBlockHeader("Разработчик ПО");
+        information6.setBlockDesc("Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей кластерного J2EE приложения (OLAP, Data mining).");
+        listInformation6.addBlock(information6);
+        objectSection.addInfo(listInformation6);
 
-        ListBlock listBlock7 = new ListBlock("Siemens AG");
-        Block block7 = new Block();
-        block7.setPeriod("01/2005", "02/2007");
-        block7.setBlockHeader("Разработчик ПО");
-        block7.setBlockDesc("Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix).");
-        listBlock7.addBlock(block7);
-        objectSection.addInfo(listBlock7);
+        ListInformation listInformation7 = new ListInformation("Siemens AG");
+        Information information7 = new Information();
+        information7.setPeriod("01/2005", "02/2007");
+        information7.setBlockHeader("Разработчик ПО");
+        information7.setBlockDesc("Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix).");
+        listInformation7.addBlock(information7);
+        objectSection.addInfo(listInformation7);
 
-        ListBlock listBlock8 = new ListBlock("Alcatel");
-        Block block8 = new Block();
-        block8.setPeriod("09/1997", "01/2005");
-        block8.setBlockHeader("Инженер по аппаратному и программному тестированию");
-        block8.setBlockDesc("Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM).");
-        listBlock8.addBlock(block8);
-        objectSection.addInfo(listBlock8);
+        ListInformation listInformation8 = new ListInformation("Alcatel");
+        Information information8 = new Information();
+        information8.setPeriod("09/1997", "01/2005");
+        information8.setBlockHeader("Инженер по аппаратному и программному тестированию");
+        information8.setBlockDesc("Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM).");
+        listInformation8.addBlock(information8);
+        objectSection.addInfo(listInformation8);
         return objectSection;
     }
 
     private static Section getEducationSection() {
         ObjectSection objectSection = new ObjectSection("");
 
-        ListBlock listBlock1 = new ListBlock("Coursera");
-        Block block1 = new Block();
-        block1.setPeriod("03/2013", "05/2013");
-        block1.setBlockHeader("\"Functional Programming Principles in Scala\" by Martin Odersky");
-        block1.setBlockDesc("");
-        listBlock1.addBlock(block1);
-        objectSection.addInfo(listBlock1);
+        ListInformation listInformation1 = new ListInformation("Coursera");
+        Information information1 = new Information();
+        information1.setPeriod("03/2013", "05/2013");
+        information1.setBlockHeader("\"Functional Programming Principles in Scala\" by Martin Odersky");
+        information1.setBlockDesc("");
+        listInformation1.addBlock(information1);
+        objectSection.addInfo(listInformation1);
 
-        ListBlock listBlock2 = new ListBlock("Luxoft");
-        Block block2 = new Block();
-        block2.setPeriod("03/2011", "04/2011");
-        block2.setBlockHeader("Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"");
-        block2.setBlockDesc("");
-        listBlock2.addBlock(block2);
-        objectSection.addInfo(listBlock2);
+        ListInformation listInformation2 = new ListInformation("Luxoft");
+        Information information2 = new Information();
+        information2.setPeriod("03/2011", "04/2011");
+        information2.setBlockHeader("Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"");
+        information2.setBlockDesc("");
+        listInformation2.addBlock(information2);
+        objectSection.addInfo(listInformation2);
 
-        ListBlock listBlock3 = new ListBlock("Siemens AG");
-        Block block3 = new Block();
-        block3.setPeriod("01/2005", "04/2005");
-        block3.setBlockHeader("3 месяца обучения мобильным IN сетям (Берлин)");
-        block3.setBlockDesc("");
-        listBlock3.addBlock(block3);
-        objectSection.addInfo(listBlock3);
+        ListInformation listInformation3 = new ListInformation("Siemens AG");
+        Information information3 = new Information();
+        information3.setPeriod("01/2005", "04/2005");
+        information3.setBlockHeader("3 месяца обучения мобильным IN сетям (Берлин)");
+        information3.setBlockDesc("");
+        listInformation3.addBlock(information3);
+        objectSection.addInfo(listInformation3);
 
-        ListBlock listBlock4 = new ListBlock("Alcatel");
-        Block block4 = new Block();
-        block4.setPeriod("09/1997", "03/1998");
-        block4.setBlockHeader("6 месяцев обучения цифровым телефонным сетям (Москва)");
-        block4.setBlockDesc("");
-        listBlock4.addBlock(block4);
-        objectSection.addInfo(listBlock4);
+        ListInformation listInformation4 = new ListInformation("Alcatel");
+        Information information4 = new Information();
+        information4.setPeriod("09/1997", "03/1998");
+        information4.setBlockHeader("6 месяцев обучения цифровым телефонным сетям (Москва)");
+        information4.setBlockDesc("");
+        listInformation4.addBlock(information4);
+        objectSection.addInfo(listInformation4);
 
-        ListBlock listBlock5 = new ListBlock("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики");
-        Block block51 = new Block();
-        block51.setPeriod("09/1993", "07/1996");
-        block51.setBlockHeader("Аспирантура (программист С, С++)");
-        block51.setBlockDesc("");
-        listBlock5.addBlock(block51);
+        ListInformation listInformation5 = new ListInformation("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики");
+        Information information51 = new Information();
+        information51.setPeriod("09/1993", "07/1996");
+        information51.setBlockHeader("Аспирантура (программист С, С++)");
+        information51.setBlockDesc("");
+        listInformation5.addBlock(information51);
 
-        Block block52 = new Block();
-        block52.setPeriod("09/1987", "07/1993");
-        block52.setBlockHeader("Инженер (программист Fortran, C)");
-        block52.setBlockDesc("");
-        listBlock5.addBlock(block52);
-        objectSection.addInfo(listBlock5);
+        Information information52 = new Information();
+        information52.setPeriod("09/1987", "07/1993");
+        information52.setBlockHeader("Инженер (программист Fortran, C)");
+        information52.setBlockDesc("");
+        listInformation5.addBlock(information52);
+        objectSection.addInfo(listInformation5);
 
-        ListBlock listBlock6 = new ListBlock("Заочная физико-техническая школа при МФТИ");
-        Block block6 = new Block();
-        block6.setPeriod("09/1984", "06/1987");
-        block6.setBlockHeader("Закончил с отличием");
-        block6.setBlockDesc("");
-        listBlock6.addBlock(block6);
-        objectSection.addInfo(listBlock6);
+        ListInformation listInformation6 = new ListInformation("Заочная физико-техническая школа при МФТИ");
+        Information information6 = new Information();
+        information6.setPeriod("09/1984", "06/1987");
+        information6.setBlockHeader("Закончил с отличием");
+        information6.setBlockDesc("");
+        listInformation6.addBlock(information6);
+        objectSection.addInfo(listInformation6);
         return objectSection;
     }
 

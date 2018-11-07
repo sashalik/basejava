@@ -1,6 +1,6 @@
 package ru.javawebinar.basejava.model;
 
-public class Block {
+public class Information {
     private String dateBeg;
     private String dateEnd;
     private String blockHeader;
