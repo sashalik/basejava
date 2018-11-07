@@ -3,10 +3,10 @@ package ru.javawebinar.basejava.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStringSection extends Section {
+public class StringSection extends Section {
     private List<String> listInfo = new ArrayList<>();
 
-    public ListStringSection(String sectionInfo) {
+    public StringSection(String sectionInfo) {
         super(sectionInfo);
     }
 
