@@ -1,9 +1,9 @@
 package ru.javawebinar.basejava.model;
 
-public abstract class Section {
+public abstract class AbstractSection {
     protected String sectionInfo;
 
-    public Section(String sectionInfo) {
+    public AbstractSection(String sectionInfo) {
         this.sectionInfo = sectionInfo;
     }
 

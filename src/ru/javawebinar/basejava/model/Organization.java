@@ -1,6 +1,6 @@
 package ru.javawebinar.basejava.model;
 
-public class Information {
+public class Organization {
     private String dateBeg;
     private String dateEnd;
     private String blockHeader;

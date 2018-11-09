@@ -3,7 +3,7 @@ package ru.javawebinar.basejava.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringSection extends Section {
+public class StringSection extends AbstractSection {
     private List<String> listInfo = new ArrayList<>();
 
     public StringSection(String sectionInfo) {
