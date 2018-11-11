@@ -17,8 +17,8 @@ public class Resume implements Comparable<Resume> {
         this.fullName = fullName;
     }
 
-    public void addSection(SectionType sectionType, AbstractSection abstractSection) {
-        sections.put(sectionType, abstractSection);
+    public void addSection(SectionType sectionType, AbstractSection section) {
+        sections.put(sectionType, section);
     }
 
     public AbstractSection getSection(SectionType sectionType) {
@@ -46,15 +46,15 @@ public class Resume implements Comparable<Resume> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Resume resume = (Resume) o;
-        if (!uuid.equals(resume.uuid)) {
-            return false;
-        }
-        return fullName.equals(resume.fullName);
+        return Objects.equals(uuid, resume.uuid) &&
+                Objects.equals(fullName, resume.fullName) &&
+                Objects.equals(contacts, resume.contacts) &&
+                Objects.equals(sections, resume.sections);
     }
 
     @Override
     public int hashCode() {
-        return uuid.hashCode() + fullName.hashCode();
+        return Objects.hash(uuid, fullName, contacts, sections);
     }
 
     @Override
@@ -64,10 +64,7 @@ public class Resume implements Comparable<Resume> {
 
     @Override
     public int compareTo(Resume o) {
-        if (fullName.equals(o.fullName)) {
-            return uuid.compareTo(o.uuid);
-        }
-        return fullName.compareTo(o.fullName);
+        return fullName.equals(o.fullName) ? uuid.compareTo(o.uuid) : fullName.compareTo(o.fullName);
     }
 
 }

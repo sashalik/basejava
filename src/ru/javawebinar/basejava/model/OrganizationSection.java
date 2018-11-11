@@ -2,13 +2,10 @@ package ru.javawebinar.basejava.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class ObjectSection extends AbstractSection {
+public class OrganizationSection extends AbstractSection {
     private List<ListOrganizations> listInfo = new ArrayList<>();
-
-    public ObjectSection(String sectionInfo) {
-        super(sectionInfo);
-    }
 
     public void addInfo(ListOrganizations listOrganizations) {
         listInfo.add(listOrganizations);
@@ -21,5 +18,18 @@ public class ObjectSection extends AbstractSection {
             infoString.append("* " + listOrganizations.toString());
         }
         return infoString.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrganizationSection that = (OrganizationSection) o;
+        return Objects.equals(listInfo, that.listInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(listInfo);
     }
 }
