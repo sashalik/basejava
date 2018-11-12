@@ -86,136 +86,80 @@ public class ResumeTestData {
     private static AbstractSection getExperienceSection() {
         OrganizationSection organizationSection = new OrganizationSection();
 
-        ListOrganizations listOrganizations1 = new ListOrganizations("Java Online Projects", "");
-        Organization organization1 = new Organization();
-        organization1.setPeriod("10/2013", "Сейчас");
-        organization1.setTitle("Автор проекта.");
-        organization1.setDescription("Создание, организация и проведение Java онлайн проектов и стажировок.");
-        listOrganizations1.addBlock(organization1);
-        organizationSection.addInfo(listOrganizations1);
+        Organization organization1 = new Organization("Java Online Projects", "");
+        organization1.addPosition(new Organization.Position("10/2013", "Сейчас", "Автор проекта.", "Создание, организация и проведение Java онлайн проектов и стажировок."));
+        organizationSection.addOrganization(organization1);
 
-        ListOrganizations listOrganizations2 = new ListOrganizations("Wrike", "");
-        Organization organization2 = new Organization();
-        organization2.setPeriod("10/2014", "01/2016");
-        organization2.setTitle("Старший разработчик (backend)");
-        organization2.setDescription("Проектирование и разработка онлайн платформы управления проектами Wrike " +
-                "(Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.");
-        listOrganizations2.addBlock(organization2);
-        organizationSection.addInfo(listOrganizations2);
+        Organization organizations2 = new Organization("Wrike", "");
+        organizations2.addPosition(new Organization.Position("10/2014", "01/2016", "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы управления проектами Wrike " +
+                "(Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO."));
+        organizationSection.addOrganization(organizations2);
 
-        ListOrganizations listOrganizations3 = new ListOrganizations("RIT Center", "");
-        Organization organization3 = new Organization();
-        organization3.setPeriod("04/2012", "10/2014");
-        organization3.setTitle("Java архитектор");
-        organization3.setDescription("Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы" +
+
+        Organization organizations3 = new Organization("RIT Center", "");
+        organizations3.addPosition(new Organization.Position("04/2012", "10/2014", "Java архитектор", "Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы" +
                 " (кастомизация Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной части системы. Разработка интергационных сервисов: " +
                 "CMIS, BPMN2, 1C (WebServices), сервисов общего назначения (почта, экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online редактирование из браузера " +
                 "документов MS Office. Maven + plugin development, Ant, Apache Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, " +
-                "Unix shell remote scripting via ssh tunnels, PL/Python");
-        listOrganizations3.addBlock(organization3);
-        organizationSection.addInfo(listOrganizations3);
+                "Unix shell remote scripting via ssh tunnels, PL/Python"));
+        organizationSection.addOrganization(organizations3);
 
-        ListOrganizations listOrganizations4 = new ListOrganizations("Luxoft (Deutsche Bank)", "");
-        Organization organization4 = new Organization();
-        organization4.setPeriod("12/2010", "04/2012");
-        organization4.setTitle("Ведущий программист");
-        organization4.setDescription("Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT, Jasper, Oracle). Реализация клиентской и серверной части CRM. " +
+        Organization organizations4 = new Organization("Luxoft (Deutsche Bank)", "");
+        organizations4.addPosition(new Organization.Position("12/2010", "04/2012", "Ведущий программист", "Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT, Jasper, Oracle). Реализация клиентской и серверной части CRM. " +
                 "Реализация RIA-приложения для администрирования, мониторинга и анализа результатов в области алгоритмического трейдинга. JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Highstock, " +
-                "Commet, HTML5.");
-        listOrganizations4.addBlock(organization4);
-        organizationSection.addInfo(listOrganizations4);
+                "Commet, HTML5."));
+        organizationSection.addOrganization(organizations4);
 
-        ListOrganizations listOrganizations5 = new ListOrganizations("Yota", "");
-        Organization organization5 = new Organization();
-        organization5.setPeriod("06/2008", "12/2010");
-        organization5.setTitle("Ведущий специалист");
-        organization5.setDescription("Дизайн и имплементация Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J, EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). " +
-                "Реализация администрирования, статистики и мониторинга фреймворка. Разработка online JMX клиента (Python/ Jython, Django, ExtJS)");
-        listOrganizations5.addBlock(organization5);
-        organizationSection.addInfo(listOrganizations5);
+        Organization organizations5 = new Organization("Yota", "");
+        organizations5.addPosition(new Organization.Position("06/2008", "12/2010", "Ведущий специалист", "Дизайн и имплементация Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J, EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). " +
+                "Реализация администрирования, статистики и мониторинга фреймворка. Разработка online JMX клиента (Python/ Jython, Django, ExtJS)"));
+        organizationSection.addOrganization(organizations5);
 
-        ListOrganizations listOrganizations6 = new ListOrganizations("Enkata", "");
-        Organization organization6 = new Organization();
-        organization6.setPeriod("03/2007", "06/2008");
-        organization6.setTitle("Разработчик ПО");
-        organization6.setDescription("Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей кластерного J2EE приложения (OLAP, Data mining).");
-        listOrganizations6.addBlock(organization6);
-        organizationSection.addInfo(listOrganizations6);
+        Organization organizations6 = new Organization("Enkata", "");
+        organizations6.addPosition(new Organization.Position("03/2007", "06/2008", "Разработчик ПО", "Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей кластерного J2EE приложения (OLAP, Data mining)."));
+        organizationSection.addOrganization(organizations6);
 
-        ListOrganizations listOrganizations7 = new ListOrganizations("Siemens AG", "");
-        Organization organization7 = new Organization();
-        organization7.setPeriod("01/2005", "02/2007");
-        organization7.setTitle("Разработчик ПО");
-        organization7.setDescription("Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix).");
-        listOrganizations7.addBlock(organization7);
-        organizationSection.addInfo(listOrganizations7);
+        Organization organizations7 = new Organization("Siemens AG", "");
+        organizations7.addPosition(new Organization.Position("01/2005", "02/2007", "Разработчик ПО", "Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix)."));
+        organizationSection.addOrganization(organizations7);
 
-        ListOrganizations listOrganizations8 = new ListOrganizations("Alcatel", "");
-        Organization organization8 = new Organization();
-        organization8.setPeriod("09/1997", "01/2005");
-        organization8.setTitle("Инженер по аппаратному и программному тестированию");
-        organization8.setDescription("Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM).");
-        listOrganizations8.addBlock(organization8);
-        organizationSection.addInfo(listOrganizations8);
+        Organization organizations8 = new Organization("Alcatel", "");
+        organizations8.addPosition(new Organization.Position("09/1997", "01/2005", "Инженер по аппаратному и программному тестированию", "Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM)."));
+        organizationSection.addOrganization(organizations8);
+
         return organizationSection;
     }
 
     private static AbstractSection getEducationSection() {
         OrganizationSection organizationSection = new OrganizationSection();
 
-        ListOrganizations listOrganizations1 = new ListOrganizations("Coursera", "");
-        Organization organization1 = new Organization();
-        organization1.setPeriod("03/2013", "05/2013");
-        organization1.setTitle("\"Functional Programming Principles in Scala\" by Martin Odersky");
-        organization1.setDescription("");
-        listOrganizations1.addBlock(organization1);
-        organizationSection.addInfo(listOrganizations1);
+        Organization organization1 = new Organization("Coursera", "");
+        organization1.addPosition(new Organization.Position("03/2013", "05/2013", "\"Functional Programming Principles in Scala\" by Martin Odersky", ""));
+        organizationSection.addOrganization(organization1);
 
-        ListOrganizations listOrganizations2 = new ListOrganizations("Luxoft", "");
-        Organization organization2 = new Organization();
-        organization2.setPeriod("03/2011", "04/2011");
-        organization2.setTitle("Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"");
-        organization2.setDescription("");
-        listOrganizations2.addBlock(organization2);
-        organizationSection.addInfo(listOrganizations2);
+        Organization organization2 = new Organization("Luxoft", "");
+        organization2.addPosition(new Organization.Position("03/2011", "04/2011", "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"", ""));
+        organizationSection.addOrganization(organization2);
 
-        ListOrganizations listOrganizations3 = new ListOrganizations("Siemens AG", "");
-        Organization organization3 = new Organization();
-        organization3.setPeriod("01/2005", "04/2005");
-        organization3.setTitle("3 месяца обучения мобильным IN сетям (Берлин)");
-        organization3.setDescription("");
-        listOrganizations3.addBlock(organization3);
-        organizationSection.addInfo(listOrganizations3);
 
-        ListOrganizations listOrganizations4 = new ListOrganizations("Alcatel", "");
-        Organization organization4 = new Organization();
-        organization4.setPeriod("09/1997", "03/1998");
-        organization4.setTitle("6 месяцев обучения цифровым телефонным сетям (Москва)");
-        organization4.setDescription("");
-        listOrganizations4.addBlock(organization4);
-        organizationSection.addInfo(listOrganizations4);
+        Organization organization3 = new Organization("Siemens AG", "");
+        organization3.addPosition(new Organization.Position("01/2005", "04/2005", "3 месяца обучения мобильным IN сетям (Берлин)", ""));
+        organizationSection.addOrganization(organization3);
 
-        ListOrganizations listOrganizations5 = new ListOrganizations("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", "");
-        Organization organization51 = new Organization();
-        organization51.setPeriod("09/1993", "07/1996");
-        organization51.setTitle("Аспирантура (программист С, С++)");
-        organization51.setDescription("");
-        listOrganizations5.addBlock(organization51);
 
-        Organization organization52 = new Organization();
-        organization52.setPeriod("09/1987", "07/1993");
-        organization52.setTitle("Инженер (программист Fortran, C)");
-        organization52.setDescription("");
-        listOrganizations5.addBlock(organization52);
-        organizationSection.addInfo(listOrganizations5);
+        Organization organization4 = new Organization("Alcatel", "");
+        organization4.addPosition(new Organization.Position("09/1997", "03/1998", "6 месяцев обучения цифровым телефонным сетям (Москва)", ""));
+        organizationSection.addOrganization(organization4);
 
-        ListOrganizations listOrganizations6 = new ListOrganizations("Заочная физико-техническая школа при МФТИ", "");
-        Organization organization6 = new Organization();
-        organization6.setPeriod("09/1984", "06/1987");
-        organization6.setTitle("Закончил с отличием");
-        organization6.setDescription("");
-        listOrganizations6.addBlock(organization6);
-        organizationSection.addInfo(listOrganizations6);
+        Organization organization5 = new Organization("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", "");
+        organization5.addPosition(new Organization.Position("09/1993", "07/1996", "Аспирантура (программист С, С++)", ""));
+        organization5.addPosition(new Organization.Position("09/1987", "07/1993", "Инженер (программист Fortran, C)", ""));
+        organizationSection.addOrganization(organization5);
+
+        Organization organization6 = new Organization("Заочная физико-техническая школа при МФТИ", "");
+        organization6.addPosition(new Organization.Position("09/1984", "06/1987", "Закончил с отличием", ""));
+        organizationSection.addOrganization(organization6);
+
         return organizationSection;
     }
 

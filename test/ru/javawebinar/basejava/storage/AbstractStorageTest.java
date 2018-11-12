@@ -56,6 +56,11 @@ public class AbstractStorageTest {
         assertSame(storage.get(UUID_2), resume);
     }
 
+    @Test(expected = NotExistStorageException.class)
+    public void updateNotExist() throws Exception{
+        storage.get("valera");
+    }
+
     @Test
     public void save() throws Exception {
         storage.save(resume_4);

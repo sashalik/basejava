@@ -1,41 +1,29 @@
 package ru.javawebinar.basejava.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Organization {
-    private String dateBeg;
-    private String dateEnd;
-    private String title;
-    private String description;
+    private Link link;
+    private List<Position> listPosition = new ArrayList<>();
 
-    public void setPeriod(String dateBeg, String dateEnd) {
-        this.dateBeg = dateBeg;
-        this.dateEnd = dateEnd;
+    public Organization(String name, String url) {
+        link = new Link(name, url);
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void addPosition(Position position) {
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPeriod() {
-        return dateBeg.toString() + dateEnd.toString();
-    }
-
-    public String getBlockHeader() {
-        return this.title;
-    }
-
-    public String getBlockDesc() {
-        return this.description;
+        this.listPosition.add(position);
     }
 
     @Override
     public String toString() {
-        return dateBeg + " - " + dateEnd + " " + title + "\n" + description;
+        StringBuilder infoStringBlock = new StringBuilder(listPosition.size());
+        for (Position b : listPosition) {
+            infoStringBlock.append(b.toString() + "\n");
+        }
+        return link.toString() + "\n" + infoStringBlock.toString();
     }
 
     @Override
@@ -43,15 +31,57 @@ public class Organization {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
-        return Objects.equals(dateBeg, that.dateBeg) &&
-                Objects.equals(dateEnd, that.dateEnd) &&
-                Objects.equals(title, that.title) &&
-                Objects.equals(description, that.description);
+        return Objects.equals(link, that.link) &&
+                Objects.equals(listPosition, that.listPosition);
     }
 
     @Override
     public int hashCode() {
+        return Objects.hash(link, listPosition);
+    }
 
-        return Objects.hash(dateBeg, dateEnd, title, description);
+    public static class Position {
+        private String dateBeg;
+        private String dateEnd;
+        private String title;
+        private String description;
+
+        public Position(String dateBeg, String dateEnd, String title, String description) {
+            this.dateBeg = dateBeg;
+            this.dateEnd = dateEnd;
+            this.title = title;
+            this.description = description;
+        }
+
+        public void setPeriod(String dateBeg, String dateEnd) {
+            this.dateBeg = dateBeg;
+            this.dateEnd = dateEnd;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getPeriod() {
+            return dateBeg.toString() + dateEnd.toString();
+        }
+
+        public String getBlockHeader() {
+            return this.title;
+        }
+
+        public String getBlockDesc() {
+            return this.description;
+        }
+
+        @Override
+        public String toString() {
+            return dateBeg + " - " + dateEnd + " " + title + "\n" + description;
+        }
     }
 }
+

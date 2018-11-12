@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class OrganizationSection extends AbstractSection {
-    private List<ListOrganizations> listInfo = new ArrayList<>();
+    private List<Organization> listOrganization = new ArrayList<>();
 
-    public void addInfo(ListOrganizations listOrganizations) {
-        listInfo.add(listOrganizations);
+    public void addOrganization(Organization organization) {
+        listOrganization.add(organization);
     }
 
     @Override
     public String toString() {
-        StringBuilder infoString = new StringBuilder(listInfo.size());
-        for (ListOrganizations listOrganizations : listInfo) {
-            infoString.append("* " + listOrganizations.toString());
+        StringBuilder infoString = new StringBuilder(listOrganization.size());
+        for (Organization organization : listOrganization) {
+            infoString.append("* " + organization.toString());
         }
         return infoString.toString();
     }
@@ -25,11 +25,11 @@ public class OrganizationSection extends AbstractSection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrganizationSection that = (OrganizationSection) o;
-        return Objects.equals(listInfo, that.listInfo);
+        return Objects.equals(listOrganization, that.listOrganization);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(listInfo);
+        return Objects.hash(listOrganization);
     }
 }
