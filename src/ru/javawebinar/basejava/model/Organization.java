@@ -1,6 +1,7 @@
 package ru.javawebinar.basejava.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +11,11 @@ public class Organization {
 
     public Organization(String name, String url) {
         link = new Link(name, url);
+    }
+
+    public Organization(String name, String url, Position... listPositions) {
+        link = new Link(name, url);
+        this.listPosition = Arrays.asList(listPositions);
     }
 
     public void addPosition(Position position) {
