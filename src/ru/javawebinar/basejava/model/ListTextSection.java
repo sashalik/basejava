@@ -8,10 +8,6 @@ import java.util.Objects;
 public class ListTextSection extends AbstractSection {
     private List<String> listInfo = new ArrayList<>();
 
-    public ListTextSection(){
-
-    }
-
     public ListTextSection(String... listInfo) {
         this(Arrays.asList(listInfo));
     }
@@ -19,10 +15,6 @@ public class ListTextSection extends AbstractSection {
     public ListTextSection(List<String> listInfo) {
         this.listInfo = listInfo;
     }
-
-    /*public void addInfo(String info) {
-        this.listInfo.add(info);
-    }*/
 
     @Override
     public String toString() {

@@ -8,8 +8,10 @@ public class MainFile {
     private static void findFiles(File file) throws IOException {
         if (file.isDirectory()) {
             File[] list = file.listFiles();
-            for (int i = 0; i < list.length; i++) {
-                findFiles(list[i]);
+            if (list != null) {
+                for (int i = 0; i < list.length; i++) {
+                    findFiles(list[i]);
+                }
             }
         } else {
             if (file.isFile()) {
