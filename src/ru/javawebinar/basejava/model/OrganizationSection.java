@@ -1,12 +1,11 @@
 package ru.javawebinar.basejava.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class OrganizationSection extends AbstractSection {
-    private List<Organization> listOrganization = new ArrayList<>();
+    private List<Organization> listOrganization;
 
     public OrganizationSection(Organization... listOrganization) {
         this.listOrganization = Arrays.asList(listOrganization);

@@ -30,12 +30,15 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        return directory.listFiles().length;
+        return directory.listFiles() == null ? 0 : directory.listFiles().length;
     }
 
     @Override
     protected void clean() {
-        Arrays.stream(directory.listFiles()).forEach(File::delete);
+        File[] listFiles = directory.listFiles();
+        if (listFiles != null) {
+            Arrays.stream(listFiles).forEach(File::delete);
+        }
     }
 
     @Override
