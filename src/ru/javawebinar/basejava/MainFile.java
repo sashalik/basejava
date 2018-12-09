@@ -5,26 +5,26 @@ import java.io.IOException;
 
 public class MainFile {
     // Recursive function
-    private static void findFiles(File file) throws IOException {
-        if (file.isDirectory()) {
-            File[] list = file.listFiles();
-            if (list != null) {
-                for (int i = 0; i < list.length; i++) {
-                    findFiles(list[i]);
+    private static void findFiles(File files, String shift) throws IOException {
+        File[] listFile = files.listFiles();
+
+        if (listFile != null) {
+            for (File file : listFile) {
+                if (file.isDirectory()) {
+                    System.out.println(shift + file.getName());
+                    findFiles(file, shift + " ");
+                } else if (file.isFile()) {
+                    System.out.println(shift + file.getName());
                 }
-            }
-        } else {
-            if (file.isFile()) {
-                System.out.println(file.getName());
             }
         }
     }
 
     public static void main(String[] args) {
-        File directory = new File("C:\\LearningJava\\basejava");  // Root directory
+        File directory = new File("C:\\LearningJava\\basejava\\src");  // Root directory
 
         try {
-            findFiles(directory);
+            findFiles(directory, "");
         } catch (IOException e) {
             e.printStackTrace();
         }

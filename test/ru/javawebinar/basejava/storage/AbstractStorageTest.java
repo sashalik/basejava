@@ -6,6 +6,7 @@ import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.*;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +18,7 @@ import static ru.javawebinar.basejava.model.SectionType.*;
 //import static org.junit.Assert.assertSame;
 
 public class AbstractStorageTest {
+    protected static final File STORAGE_DIR = new File("C:\\LearningJava\\basejava\\storage");
 
     protected Storage storage;
     public static final String UUID_1 = "uuid1";
