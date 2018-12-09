@@ -1,11 +1,14 @@
 package ru.javawebinar.basejava.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Organization {
+public class Organization implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Link link;
     private List<Position> listPosition = new ArrayList<>();
 
@@ -46,7 +49,9 @@ public class Organization {
         return Objects.hash(link, listPosition);
     }
 
-    public static class Position {
+    public static class Position implements Serializable {
+        private static final long serialVersionUID = 1L;
+
         private String dateBeg;
         private String dateEnd;
         private String title;
