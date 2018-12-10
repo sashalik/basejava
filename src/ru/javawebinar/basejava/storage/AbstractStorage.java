@@ -17,17 +17,17 @@ public abstract class AbstractStorage<I> implements Storage {
 
     public void update(Resume resume) {
         LOG.info("Update " + resume);
-        I index = getIndex(resume.getUuid());
-        if (!isExist(index)) {
+        I key = getKey(resume.getUuid());
+        if (!isExist(key)) {
             LOG.warning("Resume '" + resume + "' is not contained in the array");
             throw new NotExistStorageException(resume.getUuid());
         }
-        replaceResume(resume, index);
+        replaceResume(resume, key);
     }
 
     public void save(Resume resume) {
         LOG.info("Save " + resume);
-        I index = getIndex(resume.getUuid());
+        I index = getKey(resume.getUuid());
         if (isExist(index)) {
             LOG.warning("Resume '" + resume + "' is already in the array");
             throw new ExistStorageException(resume.getUuid());
@@ -37,23 +37,23 @@ public abstract class AbstractStorage<I> implements Storage {
 
     public Resume get(String uuid) {
         LOG.info("Get " + uuid);
-        I index = getIndex(uuid);
-        if (!isExist(index)) {
+        I key = getKey(uuid);
+        if (!isExist(key)) {
             LOG.warning("Resume '" + uuid + "' is not contained in the array");
             throw new NotExistStorageException(uuid);
         }
-        return getResume(index);
+        return getResume(key);
     }
 
     public void delete(String uuid) {
         LOG.info("Delete " + uuid);
-        I index = getIndex(uuid);
+        I key = getKey(uuid);
 
-        if (!isExist(index)) {
+        if (!isExist(key)) {
             LOG.warning("Resume '" + uuid + "' is not contained in the array");
             throw new NotExistStorageException(uuid);
         }
-        removeResume(index);
+        removeResume(key);
     }
 
     public List<Resume> getAllSorted() {
@@ -76,7 +76,7 @@ public abstract class AbstractStorage<I> implements Storage {
 
     protected abstract void removeResume(I index);
 
-    protected abstract I getIndex(String uuid);
+    protected abstract I getKey(String uuid);
 
     protected abstract boolean isExist(I index);
 }

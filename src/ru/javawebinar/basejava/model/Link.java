@@ -10,6 +10,7 @@ public class Link implements Serializable {
     private final String url;
 
     public Link(String name, String url) {
+        Objects.requireNonNull(name, "Name cannot be empty");
         this.name = name;
         this.url = url;
     }

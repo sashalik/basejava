@@ -47,10 +47,9 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected void replaceResume(Resume resume, File file) {
         try {
-            file.createNewFile();
             serializer.writeResume(resume, new FileOutputStream(file));
         } catch (IOException e) {
-            throw new StorageException("IO error", file.getName(), e);
+            throw new StorageException("Error writing file" + file.getAbsolutePath(), file.getName(), e);
         }
     }
 
@@ -58,10 +57,10 @@ public class FileStorage extends AbstractStorage<File> {
     protected void saveResume(Resume resume, File file) {
         try {
             file.createNewFile();
-            serializer.writeResume(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
-            throw new StorageException("IO error", file.getName(), e);
+            throw new StorageException("Error creating file" + file.getAbsolutePath(), file.getName(), e);
         }
+        replaceResume(resume, file);
     }
 
     @Override
@@ -81,7 +80,7 @@ public class FileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    protected File getIndex(String uuid) {
+    protected File getKey(String uuid) {
         return new File(directory, uuid);
     }
 
