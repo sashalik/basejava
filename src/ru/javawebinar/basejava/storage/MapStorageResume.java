@@ -38,7 +38,7 @@ public class MapStorageResume extends AbstractStorage<Resume> {
 
     @Override
     public List<Resume> getAllResume() {
-        return new ArrayList<Resume>(storage.values());
+        return new ArrayList<>(storage.values());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class MapStorageResume extends AbstractStorage<Resume> {
     }
 
     @Override
-    protected Resume getIndex(String uuid) {
+    protected Resume getKey(String uuid) {
         return storage.get(uuid);
     }
 

@@ -1,11 +1,10 @@
 package ru.javawebinar.basejava;
 
 import java.io.File;
-import java.io.IOException;
 
 public class MainFile {
     // Recursive function
-    private static void findFiles(File files, String shift) throws IOException {
+    private static void findFiles(File files, String shift) {
         File[] listFile = files.listFiles();
 
         if (listFile != null) {
@@ -23,11 +22,7 @@ public class MainFile {
     public static void main(String[] args) {
         File directory = new File("C:\\LearningJava\\basejava\\src");  // Root directory
 
-        try {
-            findFiles(directory, "");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        findFiles(directory, "");
 
         /*String filePath = "..\\.gitignore";
         File file = new File(filePath);
