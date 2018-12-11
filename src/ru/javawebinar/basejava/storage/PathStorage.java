@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
+import ru.javawebinar.basejava.storage.serialization.Serializer;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -88,7 +89,7 @@ public class PathStorage extends AbstractStorage<Path> {
     }
 
     @Override
-    protected Path getKey(String uuid) {
+    protected Path getSearchKey(String uuid) {
         return directory.resolve(uuid);
     }
 

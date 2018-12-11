@@ -7,7 +7,7 @@ import static ru.javawebinar.basejava.model.SectionType.*;
 public class ResumeTestData {
     private static Resume resume;
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         resume = new Resume("zzz", "Григорий Кислин");
 
         resume.addContact(ContactType.PHONENUMBER, "+7(921) 855-0482");
@@ -29,6 +29,32 @@ public class ResumeTestData {
         printContact();
         System.out.println("\n");
         printSection();
+    }*/
+
+    public static Resume getResume(){
+        resume = new Resume("zzz", "Григорий Кислин");
+
+        resume.addContact(ContactType.PHONENUMBER, "+7(921) 855-0482");
+        resume.addContact(ContactType.SKYPE, "grigory.kislin");
+        resume.addContact(ContactType.EMAIL, "gkislin@yandex.ru");
+        resume.addContact(ContactType.LINKEDIN, "Профиль LinkedIn");
+        resume.addContact(ContactType.GITHUB, "Профиль GitHub");
+        resume.addContact(ContactType.STACKOVERFLOW, "Профиль Stackoverflow");
+        resume.addContact(ContactType.HOMEPAGE, "Домашняя страница");
+
+        resume.addSection(OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
+        resume.addSection(PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
+        resume.addSection(ACHIEVEMENT, getAchievementSection());
+        resume.addSection(QUALIFICATIONS, getQualificationsSection());
+        resume.addSection(EXPERIENCE, getExperienceSection());
+        resume.addSection(EDUCATION, getEducationSection());
+
+        System.out.println(resume.getFullName());
+        printContact();
+        System.out.println("\n");
+        printSection();
+
+        return resume;
     }
 
     private static void printContact() {

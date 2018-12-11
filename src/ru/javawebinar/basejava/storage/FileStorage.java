@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
+import ru.javawebinar.basejava.storage.serialization.Serializer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class FileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    protected File getKey(String uuid) {
+    protected File getSearchKey(String uuid) {
         return new File(directory, uuid);
     }
 

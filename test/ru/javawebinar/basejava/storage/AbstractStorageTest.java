@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.javawebinar.basejava.ResumeTestData;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.*;
@@ -37,29 +38,7 @@ public class AbstractStorageTest {
     public static final Resume resume_4;
 
     static {
-        resume_1 = new Resume(UUID_1, FULLNAME_1);
-        resume_1.addContact(PHONENUMBER, "444-44-44");
-        resume_1.addContact(SKYPE, "gena.gena");
-        resume_1.addContact(EMAIL, "gena@yandex.ru");
-        resume_1.addContact(LINKEDIN, "Профиль LinkedIn");
-        resume_1.addContact(GITHUB, "Профиль GitHub");
-        resume_1.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
-        resume_1.addContact(HOMEPAGE, "Домашняя страница");
-        resume_1.addSection(OBJECTIVE, new TextSection("Разработчик ПО"));
-        resume_1.addSection(PERSONAL, new TextSection("Веселый, умный"));
-        resume_1.addSection(ACHIEVEMENT, new ListTextSection("Научился программировать на Java"));
-        resume_1.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
-        resume_1.addSection(EXPERIENCE, new OrganizationSection(
-                new Organization("Work 1", "",
-                        new Organization.Position("01.01.2018", "Now", "Programmer", "Software developer"))));
-        resume_1.addSection(EDUCATION,
-                new OrganizationSection(
-                        new Organization("Kemerovo State University", "kemsu.ru",
-                                new Organization.Position("01.09.2005", "01.07.2011", "Student", "Study"),
-                                new Organization.Position("01.04.2011", "01.07.2011", "Engineer", "Support")
-                        )
-                )
-        );
+        resume_1 = ResumeTestData.getResume();
 
         resume_2 = new Resume(UUID_2, FULLNAME_2);
         resume_2.addContact(PHONENUMBER, "444-44-44");
