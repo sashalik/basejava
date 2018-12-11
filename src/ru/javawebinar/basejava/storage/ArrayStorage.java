@@ -20,7 +20,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     // Метод получения индекса по поиску объекта в массиве
     @Override
-    protected Integer getKey(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
                 return i;

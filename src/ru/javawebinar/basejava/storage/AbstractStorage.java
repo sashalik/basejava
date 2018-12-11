@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
-public abstract class AbstractStorage<I> implements Storage {
+public abstract class AbstractStorage<SK> implements Storage {
     private static final Logger LOG = Logger.getLogger(AbstractStorage.class.getName());
 
     public void clear() {
@@ -17,43 +17,43 @@ public abstract class AbstractStorage<I> implements Storage {
 
     public void update(Resume resume) {
         LOG.info("Update " + resume);
-        I key = getKey(resume.getUuid());
-        if (!isExist(key)) {
+        SK searchKey = getSearchKey(resume.getUuid());
+        if (!isExist(searchKey)) {
             LOG.warning("Resume '" + resume + "' is not contained in the array");
             throw new NotExistStorageException(resume.getUuid());
         }
-        replaceResume(resume, key);
+        replaceResume(resume, searchKey);
     }
 
     public void save(Resume resume) {
         LOG.info("Save " + resume);
-        I index = getKey(resume.getUuid());
-        if (isExist(index)) {
+        SK searchKey = getSearchKey(resume.getUuid());
+        if (isExist(searchKey)) {
             LOG.warning("Resume '" + resume + "' is already in the array");
             throw new ExistStorageException(resume.getUuid());
         }
-        saveResume(resume, index);
+        saveResume(resume, searchKey);
     }
 
     public Resume get(String uuid) {
         LOG.info("Get " + uuid);
-        I key = getKey(uuid);
-        if (!isExist(key)) {
+        SK searchKey = getSearchKey(uuid);
+        if (!isExist(searchKey)) {
             LOG.warning("Resume '" + uuid + "' is not contained in the array");
             throw new NotExistStorageException(uuid);
         }
-        return getResume(key);
+        return getResume(searchKey);
     }
 
     public void delete(String uuid) {
         LOG.info("Delete " + uuid);
-        I key = getKey(uuid);
+        SK searchKey = getSearchKey(uuid);
 
-        if (!isExist(key)) {
+        if (!isExist(searchKey)) {
             LOG.warning("Resume '" + uuid + "' is not contained in the array");
             throw new NotExistStorageException(uuid);
         }
-        removeResume(key);
+        removeResume(searchKey);
     }
 
     public List<Resume> getAllSorted() {
@@ -68,15 +68,15 @@ public abstract class AbstractStorage<I> implements Storage {
 
     protected abstract void clean();
 
-    protected abstract void replaceResume(Resume resume, I index);
+    protected abstract void replaceResume(Resume resume, SK searchKey);
 
-    protected abstract void saveResume(Resume resume, I index);
+    protected abstract void saveResume(Resume resume, SK searchKey);
 
-    protected abstract Resume getResume(I index);
+    protected abstract Resume getResume(SK searchKey);
 
-    protected abstract void removeResume(I index);
+    protected abstract void removeResume(SK searchKey);
 
-    protected abstract I getKey(String uuid);
+    protected abstract SK getSearchKey(String uuid);
 
-    protected abstract boolean isExist(I index);
+    protected abstract boolean isExist(SK searchKey);
 }
