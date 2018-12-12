@@ -30,12 +30,12 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void removeResume(Integer index) {
-        storage.remove((int)index);
+        storage.remove((int) index);
     }
 
     @Override
     public List<Resume> getAllResume() {
-        return storage;
+        return new ArrayList<>(storage);
     }
 
     @Override
