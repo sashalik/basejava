@@ -1,16 +1,26 @@
 package ru.javawebinar.basejava.model;
 
+import ru.javawebinar.basejava.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Link link;
     private List<Position> listPosition = new ArrayList<>();
+
+    public Organization() {
+    }
 
     public Organization(String name, String url) {
         link = new Link(name, url);
@@ -22,7 +32,6 @@ public class Organization implements Serializable {
     }
 
     public void addPosition(Position position) {
-
         this.listPosition.add(position);
     }
 
@@ -49,22 +58,28 @@ public class Organization implements Serializable {
         return Objects.hash(link, listPosition);
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
         private static final long serialVersionUID = 1L;
 
-        private String dateBeg;
-        private String dateEnd;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate dateBeg;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate dateEnd;
         private String title;
         private String description;
 
-        public Position(String dateBeg, String dateEnd, String title, String description) {
+        public Position(){
+        }
+
+        public Position(LocalDate dateBeg, LocalDate dateEnd, String title, String description) {
             this.dateBeg = dateBeg;
             this.dateEnd = dateEnd;
             this.title = title;
             this.description = description;
         }
 
-        public void setPeriod(String dateBeg, String dateEnd) {
+        public void setPeriod(LocalDate dateBeg, LocalDate dateEnd) {
             this.dateBeg = dateBeg;
             this.dateEnd = dateEnd;
         }
@@ -92,6 +107,22 @@ public class Organization implements Serializable {
         @Override
         public String toString() {
             return dateBeg + " - " + dateEnd + " " + title + "\n" + description;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Position position = (Position) o;
+            return Objects.equals(dateBeg, position.dateBeg) &&
+                    Objects.equals(dateEnd, position.dateEnd) &&
+                    Objects.equals(title, position.title) &&
+                    Objects.equals(description, position.description);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(dateBeg, dateEnd, title, description);
         }
     }
 }
