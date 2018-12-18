@@ -19,6 +19,10 @@ public class OrganizationSection extends AbstractSection {
         this.listOrganization = Arrays.asList(listOrganization);
     }
 
+    public List<Organization> getListOrganization() {
+        return listOrganization;
+    }
+
     @Override
     public String toString() {
         StringBuilder infoString = new StringBuilder(listOrganization.size());

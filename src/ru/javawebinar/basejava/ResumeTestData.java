@@ -37,13 +37,17 @@ public class ResumeTestData {
         resume_1.addContact(GITHUB, "Профиль GitHub");
         resume_1.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
         resume_1.addContact(HOMEPAGE, "Домашняя страница");
+
         resume_1.addSection(OBJECTIVE, new TextSection("Разработчик ПО"));
         resume_1.addSection(PERSONAL, new TextSection("Веселый, умный"));
+
         resume_1.addSection(ACHIEVEMENT, new ListTextSection("Научился программировать на Java"));
         resume_1.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
-        resume_1.addSection(EXPERIENCE, new OrganizationSection(
-                new Organization("Work 1", "",
-                        new Organization.Position(LocalDate.of(2018, 1, 1), LocalDate.now(), "Programmer", "Software developer"))));
+
+        resume_1.addSection(EXPERIENCE,
+                new OrganizationSection(
+                        new Organization("Work 1", "",
+                                new Organization.Position(LocalDate.of(2018, 1, 1), LocalDate.now(), "Programmer", "Software developer"))));
         resume_1.addSection(EDUCATION,
                 new OrganizationSection(
                         new Organization("Kemerovo State University", "kemsu.ru",
@@ -61,6 +65,7 @@ public class ResumeTestData {
         resume_2.addContact(GITHUB, "Профиль GitHub");
         resume_2.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
         resume_2.addContact(HOMEPAGE, "Домашняя страница");
+
         resume_2.addSection(OBJECTIVE, new TextSection("Системный аналитик"));
         resume_2.addSection(PERSONAL, new TextSection("Красивая"));
         resume_2.addSection(ACHIEVEMENT, new ListTextSection("Уменю много говорить "));

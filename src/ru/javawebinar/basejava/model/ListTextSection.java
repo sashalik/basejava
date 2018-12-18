@@ -17,6 +17,10 @@ public class ListTextSection extends AbstractSection {
         this(Arrays.asList(listInfo));
     }
 
+    public List<String> getListInfo() {
+        return listInfo;
+    }
+
     public ListTextSection(List<String> listInfo) {
         this.listInfo = listInfo;
     }

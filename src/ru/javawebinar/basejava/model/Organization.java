@@ -31,6 +31,14 @@ public class Organization implements Serializable {
         this.listPosition = Arrays.asList(listPositions);
     }
 
+    public Link getLink() {
+        return link;
+    }
+
+    public List<Position> getListPosition() {
+        return listPosition;
+    }
+
     public void addPosition(Position position) {
         this.listPosition.add(position);
     }
@@ -102,6 +110,14 @@ public class Organization implements Serializable {
 
         public String getBlockDesc() {
             return this.description;
+        }
+
+        public LocalDate getDateBeg() {
+            return dateBeg;
+        }
+
+        public LocalDate getDateEnd() {
+            return dateEnd;
         }
 
         @Override
