@@ -92,21 +92,26 @@ public class DataStreamSerializer implements StreamSerializer {
                         break;
                     case ACHIEVEMENT:
                     case QUALIFICATIONS:
-                        List<String> listQualifications = ((ListTextSection) section).getListInfo();
+                        /*List<String> listQualifications = ((ListTextSection) section).getListInfo();
                         dos.writeInt(listQualifications.size());
                         for (String info : listQualifications) {
                             dos.writeUTF(info);
-                        }
+                        }*/
+                        writeList(dos, ((ListTextSection) section).getListInfo());
                         break;
                     case EXPERIENCE:
                     case EDUCATION:
                         List<Organization> listEducation = ((OrganizationSection) section).getListOrganization();
                         dos.writeInt(listEducation.size());
+                        //writeList(dos, listEducation);
                         for (Organization org : listEducation) {
                             dos.writeUTF(org.getLink().getName());
                             dos.writeUTF(org.getLink().getUrl());
+
                             List<Organization.Position> listPosition = org.getListPosition();
-                            dos.writeInt(listEducation.size());
+                            dos.writeInt(listPosition.size());
+
+                            //writeList(dos, listPosition);
                             for (Organization.Position position : listPosition) {
                                 dos.writeUTF(position.getDateBeg().toString());
                                 dos.writeUTF(position.getDateEnd().toString());
@@ -119,6 +124,13 @@ public class DataStreamSerializer implements StreamSerializer {
 
             }
 
+        }
+    }
+
+    private <T> void writeList(DataOutputStream dos, List<T> list) throws IOException {
+        dos.writeInt(list.size());
+        for (T element : list) {
+            dos.writeUTF(element.toString());
         }
     }
 }
