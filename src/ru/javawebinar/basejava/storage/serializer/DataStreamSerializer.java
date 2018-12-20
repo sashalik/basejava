@@ -37,16 +37,9 @@ public class DataStreamSerializer implements StreamSerializer {
 
         switch (sectionType) {
             case OBJECTIVE:
-                return new TextSection(dis.readUTF());
             case PERSONAL:
                 return new TextSection(dis.readUTF());
             case ACHIEVEMENT:
-                size = dis.readInt();
-                String[] listAchievement = new String[size];
-                for (int i = 0; i < size; i++) {
-                    listAchievement[i] = dis.readUTF();
-                }
-                return new ListTextSection(listAchievement);
             case QUALIFICATIONS:
                 size = dis.readInt();
                 String[] listQualifications = new String[size];
@@ -55,30 +48,18 @@ public class DataStreamSerializer implements StreamSerializer {
                 }
                 return new ListTextSection(listQualifications);
             case EXPERIENCE:
-                List<Organization> listExperience = new ArrayList<>();
-                size = dis.readInt();
-                for (int i = 0; i < size; i++) {
-                    Organization organization = new Organization(dis.readUTF(), dis.readUTF());
-                    int sizeListPosition = dis.readInt();
-                    for (int y = 0; y < sizeListPosition; i++) {
-                        organization.addPosition(new Organization.Position(LocalDate.parse(dis.readUTF()), LocalDate.parse(dis.readUTF()), dis.readUTF(), dis.readUTF()));
-                    }
-                    listExperience.add(organization);
-                }
-                return new OrganizationSection((Organization) listExperience);
-
             case EDUCATION:
-                List<Organization> listEducation = new ArrayList<>();
                 size = dis.readInt();
+                ArrayList<Organization> listEducation = new ArrayList<>(size);
                 for (int i = 0; i < size; i++) {
                     Organization organization = new Organization(dis.readUTF(), dis.readUTF());
                     int sizeListPosition = dis.readInt();
-                    for (int y = 0; y < sizeListPosition; i++) {
+                    for (int y = 0; y < sizeListPosition; y++) {
                         organization.addPosition(new Organization.Position(LocalDate.parse(dis.readUTF()), LocalDate.parse(dis.readUTF()), dis.readUTF(), dis.readUTF()));
                     }
                     listEducation.add(organization);
                 }
-                return new OrganizationSection((Organization) listEducation);
+                return new OrganizationSection(listEducation);
             default:
                 return null;
         }
@@ -106,52 +87,36 @@ public class DataStreamSerializer implements StreamSerializer {
                 dos.writeUTF(sectionType.name());
                 switch (sectionType) {
                     case OBJECTIVE:
-                        dos.writeUTF(((TextSection) section).getText());
-                        break;
                     case PERSONAL:
                         dos.writeUTF(((TextSection) section).getText());
                         break;
                     case ACHIEVEMENT:
-                        List<String> listAchievement = ((ListTextSection) section).getListInfo();
-                        dos.writeInt(listAchievement.size());
-                        for (String info : listAchievement) {
-                            dos.writeUTF(info);
-                        }
-                        break;
                     case QUALIFICATIONS:
-                        List<String> listQualifications = ((ListTextSection) section).getListInfo();
+                        /*List<String> listQualifications = ((ListTextSection) section).getListInfo();
                         dos.writeInt(listQualifications.size());
                         for (String info : listQualifications) {
                             dos.writeUTF(info);
-                        }
+                        }*/
+                        writeList(dos, ((ListTextSection) section).getListInfo());
                         break;
                     case EXPERIENCE:
-                        List<Organization> listExperience = ((OrganizationSection) section).getListOrganization();
-                        dos.writeInt(listExperience.size());
-                        for (Organization org : listExperience) {
-                            dos.writeUTF(org.getLink().getName());
-                            dos.writeUTF(org.getLink().getUrl());
-                            List<Organization.Position> listPosition = org.getListPosition();
-                            for (Organization.Position position : listPosition) {
-                                dos.writeUTF(position.getBlockHeader());
-                                dos.writeUTF(position.getBlockDesc());
-                                dos.writeUTF(position.getDateBeg().toString());
-                                dos.writeUTF(position.getDateEnd().toString());
-                            }
-                        }
-                        break;
                     case EDUCATION:
                         List<Organization> listEducation = ((OrganizationSection) section).getListOrganization();
                         dos.writeInt(listEducation.size());
+                        //writeList(dos, listEducation);
                         for (Organization org : listEducation) {
                             dos.writeUTF(org.getLink().getName());
                             dos.writeUTF(org.getLink().getUrl());
+
                             List<Organization.Position> listPosition = org.getListPosition();
+                            dos.writeInt(listPosition.size());
+
+                            //writeList(dos, listPosition);
                             for (Organization.Position position : listPosition) {
-                                dos.writeUTF(position.getBlockHeader());
-                                dos.writeUTF(position.getBlockDesc());
                                 dos.writeUTF(position.getDateBeg().toString());
                                 dos.writeUTF(position.getDateEnd().toString());
+                                dos.writeUTF(position.getBlockHeader());
+                                dos.writeUTF(position.getBlockDesc());
                             }
                         }
                         break;
@@ -159,6 +124,13 @@ public class DataStreamSerializer implements StreamSerializer {
 
             }
 
+        }
+    }
+
+    private <T> void writeList(DataOutputStream dos, List<T> list) throws IOException {
+        dos.writeInt(list.size());
+        for (T element : list) {
+            dos.writeUTF(element.toString());
         }
     }
 }
