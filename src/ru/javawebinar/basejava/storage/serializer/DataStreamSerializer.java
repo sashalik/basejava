@@ -27,41 +27,7 @@ public class DataStreamSerializer implements StreamSerializer {
                 SectionType sectionType = SectionType.valueOf(dis.readUTF());
                 resume.addSection(sectionType, readSection(sectionType, dis));
             }
-
             return resume;
-        }
-    }
-
-    private AbstractSection readSection(SectionType sectionType, DataInputStream dis) throws IOException {
-        int size;
-
-        switch (sectionType) {
-            case OBJECTIVE:
-            case PERSONAL:
-                return new TextSection(dis.readUTF());
-            case ACHIEVEMENT:
-            case QUALIFICATIONS:
-                size = dis.readInt();
-                String[] listQualifications = new String[size];
-                for (int i = 0; i < size; i++) {
-                    listQualifications[i] = dis.readUTF();
-                }
-                return new ListTextSection(listQualifications);
-            case EXPERIENCE:
-            case EDUCATION:
-                size = dis.readInt();
-                ArrayList<Organization> listEducation = new ArrayList<>(size);
-                for (int i = 0; i < size; i++) {
-                    Organization organization = new Organization(dis.readUTF(), dis.readUTF());
-                    int sizeListPosition = dis.readInt();
-                    for (int y = 0; y < sizeListPosition; y++) {
-                        organization.addPosition(new Organization.Position(LocalDate.parse(dis.readUTF()), LocalDate.parse(dis.readUTF()), dis.readUTF(), dis.readUTF()));
-                    }
-                    listEducation.add(organization);
-                }
-                return new OrganizationSection(listEducation);
-            default:
-                return null;
         }
     }
 
@@ -92,45 +58,76 @@ public class DataStreamSerializer implements StreamSerializer {
                         break;
                     case ACHIEVEMENT:
                     case QUALIFICATIONS:
-                        /*List<String> listQualifications = ((ListTextSection) section).getListInfo();
-                        dos.writeInt(listQualifications.size());
-                        for (String info : listQualifications) {
-                            dos.writeUTF(info);
-                        }*/
-                        writeList(dos, ((ListTextSection) section).getListInfo());
+                        writeList(dos, ((ListTextSection) section).getListInfo(), dos::writeUTF);
                         break;
                     case EXPERIENCE:
                     case EDUCATION:
-                        List<Organization> listEducation = ((OrganizationSection) section).getListOrganization();
-                        dos.writeInt(listEducation.size());
-                        //writeList(dos, listEducation);
-                        for (Organization org : listEducation) {
+                        writeList(dos, ((OrganizationSection) section).getListOrganization(), org -> {
                             dos.writeUTF(org.getLink().getName());
                             dos.writeUTF(org.getLink().getUrl());
-
-                            List<Organization.Position> listPosition = org.getListPosition();
-                            dos.writeInt(listPosition.size());
-
-                            //writeList(dos, listPosition);
-                            for (Organization.Position position : listPosition) {
-                                dos.writeUTF(position.getDateBeg().toString());
-                                dos.writeUTF(position.getDateEnd().toString());
-                                dos.writeUTF(position.getBlockHeader());
-                                dos.writeUTF(position.getBlockDesc());
-                            }
-                        }
+                            writeList(dos, org.getListPosition(),
+                                    position -> {
+                                        dos.writeUTF(position.getDateBeg().toString());
+                                        dos.writeUTF(position.getDateEnd().toString());
+                                        dos.writeUTF(position.getBlockHeader());
+                                        dos.writeUTF(position.getBlockDesc());
+                                    }
+                            );
+                        });
                         break;
                 }
-
             }
-
         }
     }
 
-    private <T> void writeList(DataOutputStream dos, List<T> list) throws IOException {
+    private AbstractSection readSection(SectionType sectionType, DataInputStream dis) throws IOException {
+
+        switch (sectionType) {
+            case OBJECTIVE:
+            case PERSONAL:
+                return new TextSection(dis.readUTF());
+            case ACHIEVEMENT:
+            case QUALIFICATIONS:
+                return new ListTextSection(readList(dis, dis::readUTF));
+            case EXPERIENCE:
+            case EDUCATION:
+                return new OrganizationSection(
+                        readList(dis, () -> new Organization(
+                                dis.readUTF(), dis.readUTF(), readList(dis, () -> new Organization.Position(
+                                LocalDate.parse(dis.readUTF()),
+                                LocalDate.parse(dis.readUTF()),
+                                dis.readUTF(),
+                                dis.readUTF()
+                        ))
+                        )));
+            default:
+                return null;
+        }
+    }
+
+    private <T> void writeList(DataOutputStream dos, List<T> list, Writer<T> writer) throws IOException {
         dos.writeInt(list.size());
         for (T element : list) {
-            dos.writeUTF(element.toString());
+            writer.writeList(element);
         }
     }
+
+    public interface Writer<T> {
+        void writeList(T t) throws IOException;
+    }
+
+    public interface Reader<T> {
+        T read() throws IOException;
+    }
+
+    private <T> List<T> readList(DataInputStream dis, Reader<T> reader) throws IOException {
+        int size = dis.readInt();
+        List<T> listElements = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
+            listElements.add(reader.read());
+        }
+        return listElements;
+    }
+
+
 }

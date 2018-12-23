@@ -31,6 +31,11 @@ public class Organization implements Serializable {
         this.listPosition = Arrays.asList(listPositions);
     }
 
+    public Organization(String name, String url, List<Position> listPositions) {
+        link = new Link(name, url);
+        this.listPosition = listPositions;
+    }
+
     public Link getLink() {
         return link;
     }
