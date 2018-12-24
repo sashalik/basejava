@@ -73,7 +73,6 @@ public class DataStreamSerializer implements StreamSerializer {
     }
 
     private AbstractSection readSection(SectionType sectionType, DataInputStream dis) throws IOException {
-
         switch (sectionType) {
             case OBJECTIVE:
             case PERSONAL:
