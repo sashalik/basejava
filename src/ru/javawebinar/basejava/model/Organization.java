@@ -22,19 +22,15 @@ public class Organization implements Serializable {
     public Organization() {
     }
 
-    public Organization(String name, String url) {
-        link = new Link(name, url);
-    }
-
-    public Organization(String name, String url, Position... listPositions) {
-        link = new Link(name, url);
-        this.listPosition = Arrays.asList(listPositions);
-    }
-
     public Organization(String name, String url, List<Position> listPositions) {
         link = new Link(name, url);
         this.listPosition = listPositions;
     }
+
+    public Organization(String name, String url, Position... listPositions) {
+        this(name, url, Arrays.asList(listPositions));
+    }
+
 
     public Link getLink() {
         return link;
@@ -82,14 +78,14 @@ public class Organization implements Serializable {
         private String title;
         private String description;
 
-        public Position(){
+        public Position() {
         }
 
         public Position(LocalDate dateBeg, LocalDate dateEnd, String title, String description) {
             this.dateBeg = dateBeg;
             this.dateEnd = dateEnd;
             this.title = title;
-            this.description = description;
+            this.description = description == null ? "" : description;
         }
 
         public void setPeriod(LocalDate dateBeg, LocalDate dateEnd) {

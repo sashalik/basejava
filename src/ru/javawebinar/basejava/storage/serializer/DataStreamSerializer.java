@@ -5,6 +5,7 @@ import ru.javawebinar.basejava.model.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -15,18 +16,14 @@ public class DataStreamSerializer implements StreamSerializer {
             String uuid = dis.readUTF();
             String fullName = dis.readUTF();
             Resume resume = new Resume(uuid, fullName);
-            int size = dis.readInt();
 
-            for (int i = 0; i < size; i++) {
-                resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF());
-            }
-
-            size = dis.readInt();
-
-            for (int i = 0; i < size; i++) {
+            readToMap(dis, () -> resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF()));
+            
+            readToMap(dis, () -> {
                 SectionType sectionType = SectionType.valueOf(dis.readUTF());
                 resume.addSection(sectionType, readSection(sectionType, dis));
-            }
+            });
+
             return resume;
         }
     }
@@ -37,17 +34,13 @@ public class DataStreamSerializer implements StreamSerializer {
             dos.writeUTF(resume.getUuid());
             dos.writeUTF(resume.getFullName());
             Map<ContactType, String> contacts = resume.getContacts();
-            dos.writeInt(contacts.size());
 
-            for (Map.Entry<ContactType, String> entry : resume.getContacts().entrySet()) {
+            writeList(dos, contacts.entrySet(), entry -> {
                 dos.writeUTF(entry.getKey().name());
                 dos.writeUTF(entry.getValue());
-            }
+            });
 
-            Map<SectionType, AbstractSection> sections = resume.getSections();
-            dos.writeInt(sections.size());
-
-            for (Map.Entry<SectionType, AbstractSection> entry : resume.getSections().entrySet()) {
+            writeList(dos, resume.getSections().entrySet(), entry -> {
                 SectionType sectionType = entry.getKey();
                 AbstractSection section = entry.getValue();
                 dos.writeUTF(sectionType.name());
@@ -71,12 +64,11 @@ public class DataStreamSerializer implements StreamSerializer {
                                         dos.writeUTF(position.getDateEnd().toString());
                                         dos.writeUTF(position.getBlockHeader());
                                         dos.writeUTF(position.getBlockDesc());
-                                    }
-                            );
+                                    });
                         });
                         break;
                 }
-            }
+            });
         }
     }
 
@@ -105,7 +97,7 @@ public class DataStreamSerializer implements StreamSerializer {
         }
     }
 
-    private <T> void writeList(DataOutputStream dos, List<T> list, Writer<T> writer) throws IOException {
+    private <T> void writeList(DataOutputStream dos, Collection<T> list, Writer<T> writer) throws IOException {
         dos.writeInt(list.size());
         for (T element : list) {
             writer.writeList(element);
@@ -120,6 +112,10 @@ public class DataStreamSerializer implements StreamSerializer {
         T read() throws IOException;
     }
 
+    public interface MapReader {
+        void readMap() throws IOException;
+    }
+
     private <T> List<T> readList(DataInputStream dis, Reader<T> reader) throws IOException {
         int size = dis.readInt();
         List<T> listElements = new ArrayList<>(size);
@@ -129,5 +125,10 @@ public class DataStreamSerializer implements StreamSerializer {
         return listElements;
     }
 
-
+    private void readToMap(DataInputStream dis, MapReader mapReader) throws IOException {
+        int size = dis.readInt();
+        for (int i = 0; i < size; i++) {
+            mapReader.readMap();
+        }
+    }
 }

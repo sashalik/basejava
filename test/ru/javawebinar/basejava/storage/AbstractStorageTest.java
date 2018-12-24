@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class AbstractStorageTest {
     protected static final File STORAGE_DIR = new File("C:\\LearningJava\\basejava\\storage");
@@ -45,7 +45,7 @@ public class AbstractStorageTest {
     public void update() throws Exception {
         Resume resume = resumeTestData.getResume("uuid2");
         storage.update(resume);
-        assertSame(storage.get("uuid2"), resume);
+        assertTrue(resume.equals(storage.get("uuid2")));
     }
 
     @Test(expected = NotExistStorageException.class)
