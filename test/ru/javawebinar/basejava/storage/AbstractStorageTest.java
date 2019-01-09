@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 public class AbstractStorageTest {
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
-            ;
+    ;
 
     protected Storage storage;
     protected ResumeTestData resumeTestData;
