@@ -28,6 +28,6 @@ public class MainStreams {
 
     private static List<Integer> oddOrEven(List<Integer> integers) {
         int sum = integers.stream().mapToInt(Integer::intValue).sum();
-        return integers.stream().filter(sum % 2 == 0 ?number -> number % 2 != 0 :number -> number % 2 == 0).collect(Collectors.toList());
+        return integers.stream().filter(number -> number % 2 != sum % 2).collect(Collectors.toList());
     }
 }
