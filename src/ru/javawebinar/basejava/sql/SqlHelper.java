@@ -20,8 +20,9 @@ public class SqlHelper {
              PreparedStatement ps = conn.prepareStatement(query)) {
             return executor.execute(ps);
         } catch (SQLException e) {
-            if (e instanceof PSQLException) throw new ExistStorageException(null);
-            else {
+            if ((e instanceof PSQLException) & (e.getSQLState().equals("23505"))) {
+                throw new ExistStorageException(null);
+            } else {
                 throw new StorageException(e);
             }
         }
