@@ -1,6 +1,6 @@
 create table resume
 (
-  uuid CHAR(36) primary key not NULL,
+  uuid VARCHAR(36) primary key not NULL,
   full_name TEXT
 );
 

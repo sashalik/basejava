@@ -52,7 +52,7 @@ public class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() throws Exception {
-        storage.get("valera");
+        storage.update(resumeTestData.getResume("uuid4"));
     }
 
     @Test
