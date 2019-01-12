@@ -1,6 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.exception.NotExistStorageException;
+import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.ContactType;
 import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.sql.SqlHelper;
@@ -54,11 +55,12 @@ public class SqlStorage implements Storage {
                             throw new NotExistStorageException(resume.getUuid());
                         }
                     }
-                    sqlHelper.execute("DELETE FROM contact WHERE resume_uuid = ?", ps -> {
+
+                    try (PreparedStatement ps = conn.prepareStatement("DELETE FROM contact WHERE resume_uuid = ?")) {
                         ps.setString(1, resume.getUuid());
                         ps.execute();
-                        return null;
-                    });
+                    }
+
                     insertContact(conn, resume);
                     return null;
                 }
@@ -96,18 +98,20 @@ public class SqlStorage implements Storage {
                         "SELECT * FROM resume r" +
                         "  LEFT JOIN contact c " +
                         "    ON c.resume_uuid = r.uuid " +
-                        " ORDER BY uuid"
+                        " ORDER BY full_name"
                 , st -> {
                     ResultSet rs = st.executeQuery();
                     Map<String, Resume> map = new HashMap<>();
                     while (rs.next()) {
                         String uuid = rs.getString("uuid");
-                        Resume resume = map.get(uuid);
-                        if (resume == null) {
-                            resume = new Resume(uuid, rs.getString("full_name"));
-                            map.put(uuid, resume);
-                        }
-                        addContact(rs, resume);
+                        map.computeIfAbsent(uuid, k -> {
+                            try {
+                                return new Resume(uuid, rs.getString("full_name"));
+                            } catch (SQLException e) {
+                                throw new StorageException(e);
+                            }
+                        });
+                        addContact(rs, map.get(uuid));
                     }
                     return new ArrayList<>(map.values());
                 });
