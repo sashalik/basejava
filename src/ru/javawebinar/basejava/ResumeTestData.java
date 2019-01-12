@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ru.javawebinar.basejava.model.ContactType.*;
+
 public class ResumeTestData {
     private static Resume resume;
     private Map<String, Resume> storage = new HashMap<>();
@@ -27,13 +29,13 @@ public class ResumeTestData {
 
     static {
         resume_1 = new Resume(UUID_1, FULLNAME_1);
-//        resume_1.addContact(PHONENUMBER, "444-44-44");
-//        resume_1.addContact(SKYPE, "gena.gena");
-//        resume_1.addContact(EMAIL, "gena@yandex.ru");
-//        resume_1.addContact(LINKEDIN, "Профиль LinkedIn");
-//        resume_1.addContact(GITHUB, "Профиль GitHub");
-//        resume_1.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
-//        resume_1.addContact(HOMEPAGE, "Домашняя страница");
+        resume_1.addContact(PHONENUMBER, "444-44-44");
+        resume_1.addContact(SKYPE, "gena.gena");
+        resume_1.addContact(EMAIL, "gena@yandex.ru");
+        resume_1.addContact(LINKEDIN, "Профиль LinkedIn");
+        resume_1.addContact(GITHUB, "Профиль GitHub");
+        resume_1.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
+        resume_1.addContact(HOMEPAGE, "Домашняя страница");
 //
 //        resume_1.addSection(OBJECTIVE, new TextSection("Разработчик ПО"));
 //        resume_1.addSection(PERSONAL, new TextSection("Веселый, умный"));
@@ -55,13 +57,13 @@ public class ResumeTestData {
 //        );
 
         resume_2 = new Resume(UUID_2, FULLNAME_2);
-//        resume_2.addContact(PHONENUMBER, "444-44-44");
-//        resume_2.addContact(SKYPE, "vera.vera");
-//        resume_2.addContact(EMAIL, "vera@yandex.ru");
-//        resume_2.addContact(LINKEDIN, "Профиль LinkedIn");
-//        resume_2.addContact(GITHUB, "Профиль GitHub");
-//        resume_2.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
-//        resume_2.addContact(HOMEPAGE, "Домашняя страница");
+        resume_2.addContact(PHONENUMBER, "444-44-44");
+        resume_2.addContact(SKYPE, "vera.vera");
+        resume_2.addContact(EMAIL, "vera@yandex.ru");
+        resume_2.addContact(LINKEDIN, "Профиль LinkedIn");
+        resume_2.addContact(GITHUB, "Профиль GitHub");
+        resume_2.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
+        resume_2.addContact(HOMEPAGE, "Домашняя страница");
 //
 //        resume_2.addSection(OBJECTIVE, new TextSection("Системный аналитик"));
 //        resume_2.addSection(PERSONAL, new TextSection("Красивая"));
@@ -80,13 +82,14 @@ public class ResumeTestData {
 //        );
 
         resume_3 = new Resume(UUID_3, FULLNAME_3);
-//        resume_3.addContact(PHONENUMBER, "444-44-44");
-//        resume_3.addContact(SKYPE, "dima.dima");
-//        resume_3.addContact(EMAIL, "dima@yandex.ru");
-//        resume_3.addContact(LINKEDIN, "Профиль LinkedIn");
-//        resume_3.addContact(GITHUB, "Профиль GitHub");
-//        resume_3.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
-//        resume_3.addContact(HOMEPAGE, "Домашняя страница");
+        resume_3.addContact(PHONENUMBER, "444-44-44");
+        resume_3.addContact(SKYPE, "dima.dima");
+        resume_3.addContact(EMAIL, "dima@yandex.ru");
+        resume_3.addContact(LINKEDIN, "Профиль LinkedIn");
+        resume_3.addContact(GITHUB, "Профиль GitHub");
+        resume_3.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
+        resume_3.addContact(HOMEPAGE, "Домашняя страница");
+
 //        resume_3.addSection(OBJECTIVE, new TextSection("Системный аналитик"));
 //        resume_3.addSection(PERSONAL, new TextSection("Умный"));
 //        resume_3.addSection(ACHIEVEMENT, new ListTextSection("Мало говорю "));
@@ -104,13 +107,14 @@ public class ResumeTestData {
 //        );
 
         resume_4 = new Resume(UUID_4, FULLNAME_4);
-//        resume_4.addContact(PHONENUMBER, "444-44-44");
-//        resume_4.addContact(SKYPE, "serega.serega");
-//        resume_4.addContact(EMAIL, "serega@yandex.ru");
-//        resume_4.addContact(LINKEDIN, "Профиль LinkedIn");
-//        resume_4.addContact(GITHUB, "Профиль GitHub");
-//        resume_4.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
-//        resume_4.addContact(HOMEPAGE, "Домашняя страница");
+        resume_4.addContact(PHONENUMBER, "444-44-44");
+        resume_4.addContact(SKYPE, "serega.serega");
+        resume_4.addContact(EMAIL, "serega@yandex.ru");
+        resume_4.addContact(LINKEDIN, "Профиль LinkedIn");
+        resume_4.addContact(GITHUB, "Профиль GitHub");
+        resume_4.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
+        resume_4.addContact(HOMEPAGE, "Домашняя страница");
+
 //        resume_4.addSection(OBJECTIVE, new TextSection("Владелец продуктв"));
 //        resume_4.addSection(PERSONAL, new TextSection("Заставляю проект работать и развиваться"));
 //        resume_4.addSection(ACHIEVEMENT, new ListTextSection("Моя команда всегда в работе и в тонусе"));
