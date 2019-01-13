@@ -1,14 +1,13 @@
 package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.exception.NotExistStorageException;
-import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.ContactType;
 import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.sql.SqlHelper;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,19 +97,14 @@ public class SqlStorage implements Storage {
                         "SELECT * FROM resume r" +
                         "  LEFT JOIN contact c " +
                         "    ON c.resume_uuid = r.uuid " +
-                        " ORDER BY full_name"
+                        " ORDER BY full_name, uuid"
                 , st -> {
                     ResultSet rs = st.executeQuery();
-                    Map<String, Resume> map = new HashMap<>();
+                    Map<String, Resume> map = new LinkedHashMap<>();
                     while (rs.next()) {
                         String uuid = rs.getString("uuid");
-                        map.computeIfAbsent(uuid, k -> {
-                            try {
-                                return new Resume(uuid, rs.getString("full_name"));
-                            } catch (SQLException e) {
-                                throw new StorageException(e);
-                            }
-                        });
+                        String fullName = rs.getString("full_name");
+                        map.computeIfAbsent(uuid, k -> new Resume(uuid, fullName));
                         addContact(rs, map.get(uuid));
                     }
                     return new ArrayList<>(map.values());
