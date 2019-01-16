@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static ru.javawebinar.basejava.model.ContactType.*;
+import static ru.javawebinar.basejava.model.SectionType.*;
 
 public class ResumeTestData {
     private static Resume resume;
@@ -36,12 +37,11 @@ public class ResumeTestData {
         resume_1.addContact(GITHUB, "Профиль GitHub");
         resume_1.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
         resume_1.addContact(HOMEPAGE, "Домашняя страница");
-//
-//        resume_1.addSection(OBJECTIVE, new TextSection("Разработчик ПО"));
-//        resume_1.addSection(PERSONAL, new TextSection("Веселый, умный"));
-//
-//        resume_1.addSection(ACHIEVEMENT, new ListTextSection("Научился программировать на Java"));
-//        resume_1.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
+
+        resume_1.addSection(OBJECTIVE, new TextSection("Разработчик ПО"));
+        resume_1.addSection(PERSONAL, new TextSection("Веселый, умный"));
+        resume_1.addSection(ACHIEVEMENT, new ListTextSection("Научился программировать на Java"));
+        resume_1.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
 //
 //        resume_1.addSection(EXPERIENCE,
 //                new OrganizationSection(
@@ -64,11 +64,11 @@ public class ResumeTestData {
         resume_2.addContact(GITHUB, "Профиль GitHub");
         resume_2.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
         resume_2.addContact(HOMEPAGE, "Домашняя страница");
-//
-//        resume_2.addSection(OBJECTIVE, new TextSection("Системный аналитик"));
-//        resume_2.addSection(PERSONAL, new TextSection("Красивая"));
-//        resume_2.addSection(ACHIEVEMENT, new ListTextSection("Уменю много говорить "));
-//        resume_2.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
+
+        resume_2.addSection(OBJECTIVE, new TextSection("Системный аналитик"));
+        resume_2.addSection(PERSONAL, new TextSection("Красивая"));
+        resume_2.addSection(ACHIEVEMENT, new ListTextSection("Уменю много говорить "));
+        resume_2.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
 //        resume_2.addSection(EXPERIENCE, new OrganizationSection(
 //                new Organization("Work 2", "",
 //                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "System analyst", "Software developer"))));
@@ -90,10 +90,10 @@ public class ResumeTestData {
         resume_3.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
         resume_3.addContact(HOMEPAGE, "Домашняя страница");
 
-//        resume_3.addSection(OBJECTIVE, new TextSection("Системный аналитик"));
-//        resume_3.addSection(PERSONAL, new TextSection("Умный"));
-//        resume_3.addSection(ACHIEVEMENT, new ListTextSection("Мало говорю "));
-//        resume_3.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
+        resume_3.addSection(OBJECTIVE, new TextSection("Системный аналитик"));
+        resume_3.addSection(PERSONAL, new TextSection("Умный"));
+        resume_3.addSection(ACHIEVEMENT, new ListTextSection("Мало говорю "));
+        resume_3.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
 //        resume_3.addSection(EXPERIENCE, new OrganizationSection(
 //                new Organization("Work 3", "",
 //                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "System analyst", "Software developer"))));
@@ -115,10 +115,10 @@ public class ResumeTestData {
         resume_4.addContact(STACKOVERFLOW, "Профиль Stackoverflow");
         resume_4.addContact(HOMEPAGE, "Домашняя страница");
 
-//        resume_4.addSection(OBJECTIVE, new TextSection("Владелец продуктв"));
-//        resume_4.addSection(PERSONAL, new TextSection("Заставляю проект работать и развиваться"));
-//        resume_4.addSection(ACHIEVEMENT, new ListTextSection("Моя команда всегда в работе и в тонусе"));
-//        resume_4.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
+        resume_4.addSection(OBJECTIVE, new TextSection("Владелец продуктв"));
+        resume_4.addSection(PERSONAL, new TextSection("Заставляю проект работать и развиваться"));
+        resume_4.addSection(ACHIEVEMENT, new ListTextSection("Моя команда всегда в работе и в тонусе"));
+        resume_4.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
 //        resume_4.addSection(EXPERIENCE, new OrganizationSection(
 //                new Organization("Work 2", "",
 //                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "Product owner", "Software developer"))));
