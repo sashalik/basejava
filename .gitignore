@@ -13,3 +13,4 @@ storage/uuid1
 lib/javax.servlet.jsp.jstl.jar
 lib/javax.servlet.jsp.jar
 lib/javax.servlet.jar
+lib/postgresql-42.2.5.jar
