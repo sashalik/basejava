@@ -7,7 +7,6 @@ import ru.javawebinar.basejava.sql.SqlHelper;
 
 import java.sql.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SqlStorage implements Storage {
     public final SqlHelper sqlHelper;
@@ -118,26 +117,27 @@ public class SqlStorage implements Storage {
                 while (rs.next()) {
                     String uuid = rs.getString("uuid");
                     String fullName = rs.getString("full_name");
-
-                    try (PreparedStatement psContact = conn.prepareStatement("SELECT * FROM contact WHERE resume_uuid = ?")) {
-                        psContact.setString(1, uuid);
-                        ResultSet rsContact = psContact.executeQuery();
-                        while (rsContact.next()) {
-                            addContact(rsContact, resumes.computeIfAbsent(uuid, k -> new Resume(uuid, fullName)));
-                        }
-                    }
-
-                    try (PreparedStatement psSection = conn.prepareStatement("SELECT * FROM section WHERE resume_uuid = ?")) {
-                        psSection.setString(1, uuid);
-                        ResultSet rsSection = psSection.executeQuery();
-                        while (rsSection.next()) {
-                            addSection(rsSection, resumes.computeIfAbsent(uuid, k -> new Resume(uuid, fullName)));
-                        }
-                    }
+                    resumes.computeIfAbsent(uuid, k -> new Resume(uuid, fullName));
                 }
             }
-            return resumes.values().stream().collect(Collectors.toList());
-            //return new ArrayList<>(resumes.values());
+
+            try (PreparedStatement psContact = conn.prepareStatement("SELECT * FROM contact")) {
+                ResultSet rsContact = psContact.executeQuery();
+                while (rsContact.next()) {
+                    Resume resume = resumes.get(rsContact.getString("resume_uuid"));
+                    addContact(rsContact, resume);
+                }
+            }
+
+            try (PreparedStatement psSection = conn.prepareStatement("SELECT * FROM section")) {
+                ResultSet rsSection = psSection.executeQuery();
+                while (rsSection.next()) {
+                    Resume resume = resumes.get(rsSection.getString("resume_uuid"));
+                    addSection(rsSection, resume);
+                }
+            }
+
+            return new ArrayList<>(resumes.values());
         });
     }
 
@@ -169,17 +169,16 @@ public class SqlStorage implements Storage {
                 return new TextSection(text);
             case ACHIEVEMENT:
             case QUALIFICATIONS:
-                return new ListTextSection(getArraString(text));
+                return new ListTextSection(getArrayString(text));
         }
         return null;
     }
 
-    private String[] getArraString(String text){
-        StringTokenizer stk = new StringTokenizer(text,"*");
+    private String[] getArrayString(String text) {
+        StringTokenizer stk = new StringTokenizer(text, "*");
         ArrayList<String> list = new ArrayList<String>();
-        String []ar = new String[stk.countTokens()];
-        for(int i = 0; i<ar.length; i++)
-        {
+        String[] ar = new String[stk.countTokens()];
+        for (int i = 0; i < ar.length; i++) {
             ar[i] = stk.nextToken().replace("\n", "");
         }
 
