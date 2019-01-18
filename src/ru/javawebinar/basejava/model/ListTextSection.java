@@ -27,11 +27,7 @@ public class ListTextSection extends AbstractSection {
 
     @Override
     public String toString() {
-        StringBuilder infoString = new StringBuilder(listInfo.size());
-        for (String s : listInfo) {
-            infoString.append("* " + s + "\n");
-        }
-        return infoString.toString();
+        return String.join(",", listInfo);
     }
 
     @Override
