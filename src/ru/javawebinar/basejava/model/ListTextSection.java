@@ -27,7 +27,7 @@ public class ListTextSection extends AbstractSection {
 
     @Override
     public String toString() {
-        return String.join(",", listInfo);
+        return String.join("\n", listInfo);
     }
 
     @Override
