@@ -175,14 +175,7 @@ public class SqlStorage implements Storage {
     }
 
     private String[] getArrayString(String text) {
-        StringTokenizer stk = new StringTokenizer(text, "*");
-        ArrayList<String> list = new ArrayList<String>();
-        String[] ar = new String[stk.countTokens()];
-        for (int i = 0; i < ar.length; i++) {
-            ar[i] = stk.nextToken().replace("\n", "");
-        }
-
-        return ar;
+        return text.split("\n");
     }
 
 
