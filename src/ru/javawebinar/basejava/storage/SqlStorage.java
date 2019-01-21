@@ -6,13 +6,25 @@ import ru.javawebinar.basejava.model.*;
 import ru.javawebinar.basejava.sql.SqlHelper;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SqlStorage implements Storage {
     public final SqlHelper sqlHelper;
 
     public SqlStorage(String dbUrl, String dbUser, String dbPassword) {
-        sqlHelper = new SqlHelper(() -> DriverManager.getConnection(dbUrl, dbUser, dbPassword));
+
+        sqlHelper = new SqlHelper(() -> {
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            DriverManager.registerDriver(new org.postgresql.Driver());
+            return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+        });
     }
 
     @Override
@@ -169,14 +181,14 @@ public class SqlStorage implements Storage {
                 return new TextSection(text);
             case ACHIEVEMENT:
             case QUALIFICATIONS:
-                return new ListTextSection(getArrayString(text));
+                return new ListTextSection(text.split("\n"));
         }
         return null;
     }
 
-    private String[] getArrayString(String text) {
+    /*private String[] getArrayString(String text) {
         return text.split("\n");
-    }
+    }*/
 
 
     private void insertContact(Connection conn, Resume resume) throws SQLException {
