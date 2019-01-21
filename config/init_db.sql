@@ -1,8 +1,7 @@
 create table resume
 (
   uuid      text primary key not null,
-  full_name text,
-  constraint resume_pkey primary key (uuid)
+  full_name text
 );
 
 create table contact
