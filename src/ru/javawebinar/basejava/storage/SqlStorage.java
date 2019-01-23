@@ -22,7 +22,6 @@ public class SqlStorage implements Storage {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            DriverManager.registerDriver(new org.postgresql.Driver());
             return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
         });
     }
