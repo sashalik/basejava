@@ -48,9 +48,9 @@ public class Organization implements Serializable {
     public String toString() {
         StringBuilder infoStringBlock = new StringBuilder(listPosition.size());
         for (Position b : listPosition) {
-            infoStringBlock.append(b.toString() + "\n");
+            infoStringBlock.append(b.toString() );
         }
-        return link.toString() + "\n" + infoStringBlock.toString();
+        return link.toString() + " " + infoStringBlock.toString();
     }
 
     @Override
@@ -123,7 +123,7 @@ public class Organization implements Serializable {
 
         @Override
         public String toString() {
-            return dateBeg + " - " + dateEnd + " " + title + "\n" + description;
+            return dateBeg + " " + dateEnd + " " + title + " " + description;
         }
 
         @Override
