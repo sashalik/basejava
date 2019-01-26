@@ -4,6 +4,7 @@ package ru.javawebinar.basejava.storage;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.*;
 import ru.javawebinar.basejava.sql.SqlHelper;
+import ru.javawebinar.basejava.util.JsonParser;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -167,9 +168,10 @@ public class SqlStorage implements Storage {
     }
 
     private void addSection(ResultSet rs, Resume resume) throws SQLException {
-        if (rs.getString("content") != null) {
-            SectionType sectionType = SectionType.valueOf(rs.getString("type"));
-            resume.addSection(sectionType, getSection(sectionType, rs.getString("content")));
+        String content = rs.getString("content");
+        if (content != null) {
+            SectionType type = SectionType.valueOf(rs.getString("type"));
+            resume.addSection(type, JsonParser.read(content, AbstractSection.class));
         }
     }
 
@@ -185,10 +187,6 @@ public class SqlStorage implements Storage {
         return null;
     }
 
-    /*private String[] getArrayString(String text) {
-        return text.split("\n");
-    }*/
-
 
     private void insertContact(Connection conn, Resume resume) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement("INSERT INTO contact (resume_uuid, type, value) VALUES (?,?,?)")) {
@@ -203,11 +201,12 @@ public class SqlStorage implements Storage {
     }
 
     private void insertSection(Connection conn, Resume resume) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO section (type, content, resume_uuid) VALUES (?,?,?)")) {
+        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO section (resume_uuid, type, content) VALUES (?,?,?)")) {
             for (Map.Entry<SectionType, AbstractSection> e : resume.getSections().entrySet()) {
-                ps.setString(1, e.getKey().name());
-                ps.setString(2, e.getValue().toString());
-                ps.setString(3, resume.getUuid());
+                ps.setString(1, resume.getUuid());
+                ps.setString(2, e.getKey().name());
+                AbstractSection section = e.getValue();
+                ps.setString(3, JsonParser.write(section, AbstractSection.class));
                 ps.addBatch();
             }
             ps.executeBatch();

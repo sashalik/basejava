@@ -42,19 +42,19 @@ public class ResumeTestData {
         resume_1.addSection(PERSONAL, new TextSection("Веселый, умный"));
         resume_1.addSection(ACHIEVEMENT, new ListTextSection("Научился программировать на Java"));
         resume_1.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
-//
-//        resume_1.addSection(EXPERIENCE,
-//                new OrganizationSection(
-//                        new Organization("Work 1", "",
-//                                new Organization.Position(LocalDate.of(2018, 1, 1), LocalDate.now(), "Programmer", "Software developer"))));
-//        resume_1.addSection(EDUCATION,
-//                new OrganizationSection(
-//                        new Organization("Kemerovo State University", "kemsu.ru",
-//                                new Organization.Position(LocalDate.of(2005, 9, 1), LocalDate.of(2011, 7, 1), "Student", "Study"),
-//                                new Organization.Position(LocalDate.of(2011, 4, 1), LocalDate.of(2011, 7, 1), "Engineer", "Support")
-//                        )
-//                )
-//        );
+
+        resume_1.addSection(EXPERIENCE,
+                new OrganizationSection(
+                        new Organization("Work 1", "",
+                                new Organization.Position(LocalDate.of(2018, 1, 1), LocalDate.now(), "Programmer", "Software developer"))));
+        resume_1.addSection(EDUCATION,
+                new OrganizationSection(
+                        new Organization("Kemerovo State University", "kemsu.ru",
+                                new Organization.Position(LocalDate.of(2005, 9, 1), LocalDate.of(2011, 7, 1), "Student", "Study"),
+                                new Organization.Position(LocalDate.of(2011, 4, 1), LocalDate.of(2011, 7, 1), "Engineer", "Support")
+                        )
+                )
+        );
 
         resume_2 = new Resume(UUID_2, FULLNAME_2);
         resume_2.addContact(PHONENUMBER, "444-44-44");
@@ -69,17 +69,17 @@ public class ResumeTestData {
         resume_2.addSection(PERSONAL, new TextSection("Красивая"));
         resume_2.addSection(ACHIEVEMENT, new ListTextSection("Уменю много говорить "));
         resume_2.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
-//        resume_2.addSection(EXPERIENCE, new OrganizationSection(
-//                new Organization("Work 2", "",
-//                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "System analyst", "Software developer"))));
-//        resume_2.addSection(EDUCATION,
-//                new OrganizationSection(
-//                        new Organization("Kemerovo State University", "kemsu.ru",
-//                                new Organization.Position(LocalDate.of(2005, 9, 1), LocalDate.of(2011, 7, 1), "Student", "Study"),
-//                                new Organization.Position(LocalDate.of(2011, 4, 1), LocalDate.of(2011, 7, 1), "Engineer", "Support")
-//                        )
-//                )
-//        );
+        resume_2.addSection(EXPERIENCE, new OrganizationSection(
+                new Organization("Work 2", "",
+                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "System analyst", "Software developer"))));
+        resume_2.addSection(EDUCATION,
+                new OrganizationSection(
+                        new Organization("Kemerovo State University", "kemsu.ru",
+                                new Organization.Position(LocalDate.of(2005, 9, 1), LocalDate.of(2011, 7, 1), "Student", "Study"),
+                                new Organization.Position(LocalDate.of(2011, 4, 1), LocalDate.of(2011, 7, 1), "Engineer", "Support")
+                        )
+                )
+        );
 
         resume_3 = new Resume(UUID_3, FULLNAME_3);
         resume_3.addContact(PHONENUMBER, "444-44-44");
@@ -94,17 +94,17 @@ public class ResumeTestData {
         resume_3.addSection(PERSONAL, new TextSection("Умный"));
         resume_3.addSection(ACHIEVEMENT, new ListTextSection("Мало говорю "));
         resume_3.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
-//        resume_3.addSection(EXPERIENCE, new OrganizationSection(
-//                new Organization("Work 3", "",
-//                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "System analyst", "Software developer"))));
-//        resume_3.addSection(EDUCATION,
-//                new OrganizationSection(
-//                        new Organization("Kemerovo State University", "kemsu.ru",
-//                                new Organization.Position(LocalDate.of(2005, 9, 1), LocalDate.of(2011, 7, 1), "Student", "Study"),
-//                                new Organization.Position(LocalDate.of(2011, 4, 1), LocalDate.of(2011, 7, 1), "Engineer", "Support")
-//                        )
-//                )
-//        );
+        resume_3.addSection(EXPERIENCE, new OrganizationSection(
+                new Organization("Work 3", "",
+                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "System analyst", "Software developer"))));
+        resume_3.addSection(EDUCATION,
+                new OrganizationSection(
+                        new Organization("Kemerovo State University", "kemsu.ru",
+                                new Organization.Position(LocalDate.of(2005, 9, 1), LocalDate.of(2011, 7, 1), "Student", "Study"),
+                                new Organization.Position(LocalDate.of(2011, 4, 1), LocalDate.of(2011, 7, 1), "Engineer", "Support")
+                        )
+                )
+        );
 
         resume_4 = new Resume(UUID_4, FULLNAME_4);
         resume_4.addContact(PHONENUMBER, "444-44-44");
@@ -119,17 +119,17 @@ public class ResumeTestData {
         resume_4.addSection(PERSONAL, new TextSection("Заставляю проект работать и развиваться"));
         resume_4.addSection(ACHIEVEMENT, new ListTextSection("Моя команда всегда в работе и в тонусе"));
         resume_4.addSection(QUALIFICATIONS, new ListTextSection("Java", "JDBC", "Oracle", "MySQL"));
-//        resume_4.addSection(EXPERIENCE, new OrganizationSection(
-//                new Organization("Work 2", "",
-//                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "Product owner", "Software developer"))));
-//        resume_4.addSection(EDUCATION,
-//                new OrganizationSection(
-//                        new Organization("Kemerovo State University", "kemsu.ru",
-//                                new Organization.Position(LocalDate.of(2005, 9, 1), LocalDate.of(2011, 7, 1), "Student", "Study"),
-//                                new Organization.Position(LocalDate.of(2011, 4, 1), LocalDate.of(2011, 7, 1), "Engineer", "Support")
-//                        )
-//                )
-//        );
+        resume_4.addSection(EXPERIENCE, new OrganizationSection(
+                new Organization("Work 2", "",
+                        new Organization.Position(LocalDate.of(2017, 1, 1), LocalDate.now(), "Product owner", "Software developer"))));
+        resume_4.addSection(EDUCATION,
+                new OrganizationSection(
+                        new Organization("Kemerovo State University", "kemsu.ru",
+                                new Organization.Position(LocalDate.of(2005, 9, 1), LocalDate.of(2011, 7, 1), "Student", "Study"),
+                                new Organization.Position(LocalDate.of(2011, 4, 1), LocalDate.of(2011, 7, 1), "Engineer", "Support")
+                        )
+                )
+        );
     }
 
     public ResumeTestData() {
