@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <jsp:useBean id="resume" type="ru.javawebinar.basejava.model.Resume" scope="request"/>
-    <title>Резюме ${resume.fullName}</title>
+    <title>Добавление резюме</title>
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
@@ -31,7 +31,7 @@
                             ${type.title}
                     </td>
                     <td>
-                        <input type="text" name="${type.name()}" size=39 value="${resume.getContact(type)}">
+                        <input type="text" name="${type.name()}" size=39 value="">
                     </td>
                 </tr>
             </c:forEach>
@@ -45,7 +45,7 @@
                             ${type.title}
                     </td>
                     <td>
-                        <input type="text" name="${type.name()}" size=45 value="${resume.getSection(type.name())}">
+                        <input type="text" name="${type.name()}" size=45 value="">
                     </td>
                 </tr>
             </c:forEach>

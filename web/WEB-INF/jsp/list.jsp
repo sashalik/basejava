@@ -5,12 +5,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <title>Список всех резюме</title>
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<section>
+<div class="blockView">
+    <h2> Список резюме </h2>
     <table border="1" cellpadding="8" cellspacing="0">
         <tr>
             <th>Имя</th>
@@ -28,7 +29,9 @@
             </tr>
         </c:forEach>
     </table>
-</section>
+    <p>
+    <a href="resume?action=add"><img src="img/add.png">Добавить резюме</a>
+</div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

@@ -22,6 +22,10 @@ public class Organization implements Serializable {
     public Organization() {
     }
 
+    public String getUrl(){
+        return  "<a href='" + link.getName() + "'>" + link.getUrl() + "</a>";
+    }
+
     public Organization(String name, String url, List<Position> listPositions) {
         link = new Link(name, url);
         this.listPosition = listPositions;
