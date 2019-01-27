@@ -6,13 +6,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <jsp:useBean id="resume" type="ru.javawebinar.basejava.model.Resume" scope="request"/>
     <title>Резюме ${resume.fullName}</title>
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<section>
+<div class="blockView">
     <h2>${resume.fullName}&nbsp;<a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a></h2>
     <p>
         <c:forEach var="contactEntry" items="${resume.contacts}">
@@ -22,7 +22,7 @@
         </c:forEach>
     <p>
     <p>
-    <table cellpadding="7">
+    <table>
         <c:forEach var="sectionEntry" items="${resume.sections}">
             <jsp:useBean id="sectionEntry"
                          type="java.util.Map.Entry<ru.javawebinar.basejava.model.SectionType, ru.javawebinar.basejava.model.AbstractSection>"/>
@@ -33,28 +33,14 @@
                 </td>
             </tr>
             <c:choose>
-                <c:when test="${sectionEntry.getKey() == 'OBJECTIVE'}">
+                <c:when test="${sectionEntry.getKey() == 'OBJECTIVE' || sectionEntry.getKey() == 'PERSONAL'}">
                     <tr>
                         <td>
                             <%=((TextSection) sectionEntry.getValue()).getText()%>
                         </td>
                     </tr>
                 </c:when>
-                <c:when test="${sectionEntry.getKey() == 'PERSONAL'}">
-                   <tr>
-                        <td>
-                            <%=((TextSection) sectionEntry.getValue()).getText()%>
-                        </td>
-                    </tr>
-                </c:when>
-                <c:when test="${sectionEntry.getKey() == 'ACHIEVEMENT'}">
-                    <tr>
-                        <td>
-                            <%=((ListTextSection) sectionEntry.getValue()).getListInfo().toString()%>
-                        </td>
-                    </tr>
-                </c:when>
-                <c:when test="${sectionEntry.getKey() == 'QUALIFICATIONS'}">
+                <c:when test="${sectionEntry.getKey() == 'ACHIEVEMENT' || sectionEntry.getKey() == 'QUALIFICATIONS'}">
                     <tr>
                         <td>
                             <%=((ListTextSection) sectionEntry.getValue()).getListInfo().toString()%>
@@ -66,7 +52,7 @@
                                items="<%=((OrganizationSection) sectionEntry.getValue()).getListOrganization()%>">
                         <tr>
                             <td>
-                                    ${organization.link}
+                                    ${organization.getUrl()}
                             </td>
                         </tr>
                         <c:forEach var="position" items="${organization.listPosition}">
@@ -86,7 +72,7 @@
         </c:forEach>
     </table>
     <p>
-</section>
+</div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
