@@ -1,6 +1,7 @@
 <%@ page import="ru.javawebinar.basejava.model.ListTextSection" %>
 <%@ page import="ru.javawebinar.basejava.model.TextSection" %>
 <%@ page import="ru.javawebinar.basejava.model.OrganizationSection" %>
+<%@ page import="ru.javawebinar.basejava.model.AbstractSection" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -26,12 +27,16 @@
         <c:forEach var="sectionEntry" items="${resume.sections}">
             <jsp:useBean id="sectionEntry"
                          type="java.util.Map.Entry<ru.javawebinar.basejava.model.SectionType, ru.javawebinar.basejava.model.AbstractSection>"/>
-            <tr>
-                <td>
-                    <h2><%=sectionEntry.getKey().getTitle() + ":"%>
-                    </h2>
-                </td>
-            </tr>
+            <c:choose>
+                <c:when test="${!sectionEntry.getValue().toString().equals('') }">
+                    <tr>
+                        <td>
+                            <h2><%=sectionEntry.getKey().getTitle() + ":"%>
+                            </h2>
+                        </td>
+                    </tr>
+                </c:when>
+            </c:choose>
             <c:choose>
                 <c:when test="${sectionEntry.getKey() == 'OBJECTIVE' || sectionEntry.getKey() == 'PERSONAL'}">
                     <tr>
@@ -43,7 +48,7 @@
                 <c:when test="${sectionEntry.getKey() == 'ACHIEVEMENT' || sectionEntry.getKey() == 'QUALIFICATIONS'}">
                     <tr>
                         <td>
-                            <%=((ListTextSection) sectionEntry.getValue()).getListInfo().toString()%>
+                            <%=((ListTextSection) sectionEntry.getValue()).getListInfo().toString().replaceAll("[\\[\\]]", "")%>
                         </td>
                     </tr>
                 </c:when>
