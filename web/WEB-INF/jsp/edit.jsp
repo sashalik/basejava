@@ -24,28 +24,28 @@
         </table>
 
         <h3>Контакты:</h3>
-        <table cellspacing="6">
+        <table cellspacing="10">
             <c:forEach var="type" items="<%=ContactType.values()%>">
                 <tr>
                     <td>
                             ${type.title}
                     </td>
                     <td>
-                        <input type="text" name="${type.name()}" size=39 value="${resume.getContact(type)}">
+                        <textarea name='${type}' cols=40 rows=1>${resume.getContact(type)}</textarea>
                     </td>
                 </tr>
             </c:forEach>
         </table>
 
         <h3>Секции:</h3>
-        <table cellspacing="6">
+        <table cellspacing="10">
             <c:forEach var="type" items="<%=SectionType.values()%>">
                 <tr>
                     <td>
                             ${type.title}
                     </td>
                     <td>
-                        <input type="text" name="${type.name()}" size=45 value="${resume.getSection(type.name())}">
+                        <textarea name='${type}' cols=46 rows=1>${resume.getSection(type.name())}</textarea>
                     </td>
                 </tr>
             </c:forEach>
