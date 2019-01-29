@@ -1,7 +1,7 @@
 <%@ page import="ru.javawebinar.basejava.model.ListTextSection" %>
-<%@ page import="ru.javawebinar.basejava.model.TextSection" %>
 <%@ page import="ru.javawebinar.basejava.model.OrganizationSection" %>
-<%@ page import="ru.javawebinar.basejava.model.AbstractSection" %>
+<%@ page import="ru.javawebinar.basejava.model.TextSection" %>
+<%@ page import="ru.javawebinar.basejava.util.HtmlUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -48,7 +48,10 @@
                 <c:when test="${sectionEntry.getKey() == 'ACHIEVEMENT' || sectionEntry.getKey() == 'QUALIFICATIONS'}">
                     <tr>
                         <td>
-                            <%=((ListTextSection) sectionEntry.getValue()).getListInfo().toString().replaceAll("[\\[\\]]", "")%>
+                            <c:forEach var="item"
+                                       items="<%=((ListTextSection) sectionEntry.getValue()).getListInfo()%>">
+                                <li>${item}</li>
+                            </c:forEach>
                         </td>
                     </tr>
                 </c:when>
@@ -57,6 +60,9 @@
                                items="<%=((OrganizationSection) sectionEntry.getValue()).getListOrganization()%>">
                         <tr>
                             <td>
+                                    ${organization.link.name}
+                            </td>
+                            <td>
                                     ${organization.getUrl()}
                             </td>
                         </tr>
@@ -64,15 +70,13 @@
                             <jsp:useBean id="position" type="ru.javawebinar.basejava.model.Organization.Position"/>
                             <tr>
                                 <td>
-                                    <%=position.getDateBeg() + " - " + position.getDateEnd()%>
+                                    <%=HtmlUtil.formatDates(position)%>
                                 </td>
                                 <td><b>${position.blockHeader}</b><br>${position.blockDesc}</td>
                             </tr>
                         </c:forEach>
                     </c:forEach>
-
                 </c:when>
-
             </c:choose>
         </c:forEach>
     </table>

@@ -1,5 +1,7 @@
 <%@ page import="ru.javawebinar.basejava.model.ContactType" %>
+<%@ page import="ru.javawebinar.basejava.model.OrganizationSection" %>
 <%@ page import="ru.javawebinar.basejava.model.SectionType" %>
+<%@ page import="ru.javawebinar.basejava.util.DateUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -40,14 +42,79 @@
         <h3>Секции:</h3>
         <table cellspacing="10">
             <c:forEach var="type" items="<%=SectionType.values()%>">
-                <tr>
-                    <td>
-                            ${type.title}
-                    </td>
-                    <td>
-                        <textarea name='${type}' cols=46 rows=1>${resume.getSection(type.name())}</textarea>
-                    </td>
-                </tr>
+                <c:set var="section" value="${resume.getSection(type)}"/>
+                <jsp:useBean id="section" type="ru.javawebinar.basejava.model.AbstractSection"/>
+                <c:choose>
+                    <c:when test="${type=='OBJECTIVE' || type=='PERSONAL'}">
+                        <tr>
+                            <td>
+                                    ${type.title}
+                            </td>
+                            <td>
+                                <textarea name='${type}' cols=75 rows=5><%=section%></textarea>
+                            </td>
+                        </tr>
+                    </c:when>
+                    <c:when test="${type=='QUALIFICATIONS' || type=='ACHIEVEMENT'}">
+                        <tr>
+                            <td>
+                                    ${type.title}
+                            </td>
+                            <td>
+                                <textarea name='${type}' cols=75 rows=5><%=section%></textarea>
+                            </td>
+                        </tr>
+                    </c:when>
+
+                    <c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
+                        <c:forEach var="organization" items="<%=((OrganizationSection) section).getListOrganization()%>"
+                                   varStatus="counter">
+                            <tr>
+                                <td>
+                                    <h2>${type.title}</h2>
+                                </td>
+                            <tr>
+                                <td>Организация:</td>
+                                <td><input type="text" name='${type}' size=100 value="${organization.link.name}"></td>
+                            </tr>
+                            <tr>
+                                <td>Сайт организации:</td>
+                                <td><input type="text" name='${type}url' size=100 value="${organization.link.url}"></td>
+                            </tr>
+                            <tr>
+                            <c:forEach var="pos" items="${organization.listPosition}">
+                                <jsp:useBean id="pos" type="ru.javawebinar.basejava.model.Organization.Position"/>
+                                <tr>
+                                    <td>Начальная дата:</td>
+                                    <td>
+                                        <input type="text" name="${type}${counter.index}startDate" size=10
+                                               value="<%=DateUtil.format(pos.getDateBeg())%>" placeholder="MM/yyyy">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Конечная дата:</td>
+                                    <td>
+                                        <input type="text" name="${type}${counter.index}endDate" size=10
+                                               value="<%=DateUtil.format(pos.getDateEnd())%>" placeholder="MM/yyyy">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Должность:</td>
+                                    <td><input type="text" name='${type}${counter.index}title' size=75
+                                               value="${pos.blockHeader}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Описание:</td>
+                                    <td><textarea name="${type}${counter.index}description" rows=5
+                                                  cols=75>${pos.blockDesc}</textarea>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
             </c:forEach>
         </table>
         <div class="buttons">
