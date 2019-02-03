@@ -7,6 +7,8 @@ public class TextSection extends AbstractSection {
 
     private String text;
 
+    public static final TextSection EMPTY = new TextSection("");
+
     public TextSection() {
     }
 

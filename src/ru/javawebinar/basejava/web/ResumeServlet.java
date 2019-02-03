@@ -29,8 +29,15 @@ public class ResumeServlet extends HttpServlet {
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
 
-        Resume resume = uuid.isEmpty() ? new Resume(fullName) : storage.get(uuid);
-        resume.setFullName(fullName);
+        final boolean isCreate = (uuid == null || uuid.length() == 0);
+        Resume resume;
+        if (isCreate) {
+            resume = new Resume(fullName);
+        } else {
+            resume = storage.get(uuid);
+            resume.setFullName(fullName);
+        }
+
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
             if (value != null && value.trim().length() != 0) {
@@ -57,7 +64,7 @@ public class ResumeServlet extends HttpServlet {
                         break;
                     case EDUCATION:
                     case EXPERIENCE:
-                        List<Organization> orgs = new ArrayList<>();
+                        List<Organization> org = new ArrayList<>();
                         String[] urls = request.getParameterValues(sectionType.name() + "url");
                         for (int i = 0; i < values.length; i++) {
                             String name = values[i];
@@ -73,16 +80,19 @@ public class ResumeServlet extends HttpServlet {
                                         positions.add(new Organization.Position(DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j]), titles[j], descriptions[j]));
                                     }
                                 }
-                                orgs.add(new Organization(name, urls[i], positions));
+                                org.add(new Organization(name, urls[i], positions));
                             }
                         }
-                        resume.addSection(sectionType, new OrganizationSection(orgs));
+                        resume.addSection(sectionType, new OrganizationSection(org));
                         break;
                 }
             }
         }
-        if (uuid.isEmpty()) storage.save(resume);
-        else storage.update(resume);
+        if (isCreate) {
+            storage.save(resume);
+        } else {
+            storage.update(resume);
+        }
         response.sendRedirect("resume");
     }
 
@@ -94,17 +104,19 @@ public class ResumeServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(request, response);
             return;
         }
-        Resume resume;
+        Resume r;
         switch (action) {
             case "delete":
                 storage.delete(uuid);
                 response.sendRedirect("resume");
                 return;
             case "view":
+                r = storage.get(uuid);
+                break;
             case "edit":
-                resume = storage.get(uuid);
+                r = storage.get(uuid);
                 for (SectionType type : new SectionType[]{SectionType.EXPERIENCE, SectionType.EDUCATION}) {
-                    OrganizationSection section = (OrganizationSection) resume.getSection(type);
+                    OrganizationSection section = (OrganizationSection) r.getSection(type);
                     List<Organization> emptyFirstOrganizations = new ArrayList<>();
                     emptyFirstOrganizations.add(Organization.EMPTY);
                     if (section != null) {
@@ -115,16 +127,13 @@ public class ResumeServlet extends HttpServlet {
                             emptyFirstOrganizations.add(new Organization(org.getLink().getName(), org.getLink().getUrl(), emptyFirstPositions));
                         }
                     }
-                    resume.addSection(type, new OrganizationSection(emptyFirstOrganizations));
+                    r.addSection(type, new OrganizationSection(emptyFirstOrganizations));
                 }
-                break;
-            case "add":
-                resume = new Resume();
                 break;
             default:
                 throw new IllegalArgumentException("Action " + action + " is illegal");
         }
-        request.setAttribute("resume", resume);
+        request.setAttribute("resume", r);
         request.getRequestDispatcher(
                 ("view".equals(action) ? "/WEB-INF/jsp/view.jsp" : "/WEB-INF/jsp/edit.jsp")
         ).forward(request, response);

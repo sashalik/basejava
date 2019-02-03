@@ -14,6 +14,7 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <div class="blockView">
+    <!-- Контакты -->
     <h2>${resume.fullName}&nbsp;<a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a></h2>
     <p>
         <c:forEach var="contactEntry" items="${resume.contacts}">
@@ -23,6 +24,7 @@
         </c:forEach>
     <p>
     <p>
+    <!-- Секции -->
     <table>
         <c:forEach var="sectionEntry" items="${resume.sections}">
             <jsp:useBean id="sectionEntry"
@@ -41,7 +43,7 @@
                 <c:when test="${sectionEntry.getKey() == 'OBJECTIVE' || sectionEntry.getKey() == 'PERSONAL'}">
                     <tr>
                         <td>
-                            <%=((TextSection) sectionEntry.getValue()).getText()%>
+                            <%=((TextSection) sectionEntry.getValue()).getText().replace('"',' ')%>
                         </td>
                     </tr>
                 </c:when>
